@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+
+    <head>
+        <meta charset="UTF-8">       
+        <title>Blank App Designer Cordova Web App Project Template</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
+  * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
+  * For a quick overview of "meta viewport" and @viewport, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see how it works, try your app on a real device with and without a "meta viewport" tag.
+  * Additional useful references include:
+  *   http://www.quirksmode.org/mobile/viewports.html
+  *   http://www.quirksmode.org/mobile/metaviewport/devices.html
+  *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+-->
+
+        <!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+        
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+        <link href="css/sidebar.css" rel="stylesheet">
+         <link href="css/main.css" rel="stylesheet">
+
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
+        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+
+        <!-- Recommended location for your JavaScript libraries -->
+        <!-- These library references (below) are just examples to give you the general idea... -->
+        <!-- <script src="lib/mc/hammer.js"></script> -->
+        <!-- <script src="lib/ft/fastclick.js"></script> -->
+
+        <!--
+  * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
+  * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
+  * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
+  * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
+-->
+        <script src="cordova.js" id="xdkJScordova_"></script>
+        
+         <!-- jQuery -->
+        <script src="js/jquery.min.js"></script>
+        
+        <!-- Bootstrap Core JavaScript -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        
+        <!-- jQuery -->
+        <script src="js/jquery.min.js"></script>
+        
+        <script src="js/sidebar.js"></script>
+        
+        <script src="js/app.js"></script>
+        <!-- for your event code, see README and file comments for details -->
+        <script src="js/init-app.js"></script>
+        <!-- for your init code, see README and file comments for details -->
+        <script src="xdk/init-dev.js"></script>
+        <!-- normalizes device and document ready events, see file for details -->
+    </head>
+
+    <body>
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle toggle-left hidden-lg" data-toggle="sidebar" data-target=".sidebar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <h3 class="text-verde">Chiquimula</h3>
+              </div>
+            </div>
+          </div>
+  
+        <!-- Begin page content -->
+        <div class="container">
+            <div class="row">
+              <div class="col-xs-7 col-sm-3 col-md-2 sidebar sidebar-left sidebar-animate sidebar-show-lg">
+                <ul class="nav navbar-stacked">
+                  <li class="active"><a href="index.html"><span class="text-verde"><i class="fa fa-bars" aria-hidden="true"></i></span><span>  Inicio</span></a></li>
+                  <li><a href="#about"><span class="text-verde"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></span><span>  Sitios Turisticos</span></a></li>
+                  <li><a href="#contact"><span class="text-verde"><i class="fa fa-child" aria-hidden="true"></i></span><span>  Mas cercanos</span></a></li>
+                </ul>
+              </div>
+              <div class="main">
+                <div class="page-header">
+                    <div class="bg-header-page" style="background:url(img/chiquimula3.jpg);"></div>
+                    <p>
+                        <a href="mapa.html" class="link-more text-blue">Ver Mapa <span><i class="fa fa-map-marker"></i></span></a>
+                    </p>
+                    <div class="container posr">
+                        <h1 class="text-marron-dark">Lorem ipsum dolor sit amet</h1>
+                    </div>
+                </div>
+                  <section class="">
+                    <div class="container">                        
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptate, soluta deserunt illum eaque quaerat? Aliquid assumenda sit, placeat, ea dicta quae ipsam quisquam quia, nisi et tenetur numquam modi! Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <h5 class="text-marron-dark">Datos Generales </h5>
+                        <h3 class="subtitle s-primary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptate, soluta deserunt illum eaque quaerat? Aliquid assumenda sit, placeat, ea dicta quae ipsam quisquam quia, nisi et tenetur numquam modi! Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptate, soluta deserunt illum eaque quaerat? Aliquid assumenda sit, placeat, ea dicta quae ipsam quisquam quia, nisi et tenetur numquam modi! Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>                        
+                       
+                        <p class="text-center visible-xs mt-30">
+                            <br>
+                            <a href="mapa.html" class="link-more text-blue">Ver Mapa <span><i class="fa fa-map-marker"></i></span></a>
+                        </p>
+                    </div>
+                </section>
+              </div>                
+            </div> 
+        </div>
+    </body>
+</html>

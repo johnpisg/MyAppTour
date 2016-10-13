@@ -1,0 +1,160 @@
+<div class="container">
+ <div class="row">
+    <h4>Sitios más cercanos a usted.</h4>
+ </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="map" style="height:400px;width:98%;background-color;red;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="sitio in modelo.sitios">
+                <div class="item-slide-galerias text-center-min">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-5">
+                            <div class="img-galeria">
+                                <a href="/#detalle_sitio">
+                                    <img ng-src="{{sitio.imagen}}" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-xs-7">
+                            <div class="caption-home-galeria">
+                                <h2>{{sitio.titulo}}</h2>
+                                {{sitio.ranking}}
+                                <h5 class="text-verde">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </h5>
+                                <p>
+                                    {{sitio.descripcion}}
+                                    <a href="#/detalle_sitio" class="link-more">
+                                        <span class="link-text">Ver Sitio</span>
+                                        <span class="text-blue"><i class="fa fa-chevron-right"></i></span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	var map = null;
+
+	function initMap() {
+        console.log("Iniciando mapa..");
+		// Create a map object and specify the DOM element for display.
+		map = new google.maps.Map(document.getElementById('map'), {
+		  center: {lat: -34.397, lng: 150.644},
+		  scrollwheel: false,
+		  zoom: 16
+		});
+		
+		var infoWindow = new google.maps.InfoWindow({map: map});
+
+		// Try HTML5 geolocation.
+		if (navigator.geolocation) {
+            console.log("Obteniendo ubicación..");
+			navigator.geolocation.getCurrentPosition(function(position) {
+                console.log("position");
+                console.log(position);
+			var pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+
+			infoWindow.setPosition(pos);
+			infoWindow.setContent('Usted est&aacute; aqu&iacute;.');
+			map.setCenter(pos);
+
+			var marker = new google.maps.Marker({
+			    position: pos,
+			    map: map,
+			    title: 'Desde aquí;',
+			    animation: google.maps.Animation.DROP
+			  });			
+
+			mostrarSitiosCercanos(pos, map);
+
+		}, function(errorr) {
+            console.log("errorr");
+            console.error(errorr);
+			handleLocationError(true, infoWindow, map.getCenter());
+		});
+		} else {
+            console.log("unsuportted");
+			// Browser doesn't support Geolocation
+			handleLocationError(false, infoWindow, map.getCenter());
+		}
+	}
+
+	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+	  infoWindow.setPosition(pos);
+	  infoWindow.setContent(browserHasGeolocation ?
+		                'Error: No se pudo obtener su ubicación.' :
+		                'Error: Este dispositivo no soporta geolocalización.');
+	}
+	
+	function mostrarSitiosCercanos(pos, map) {
+		console.log(pos);
+		var sitios = getPosicionesCercanas(pos, 5);
+		console.log(sitios);
+		showCercanos(sitios, map);
+	}
+
+	function showCercanos(cercanos, mapa) {
+	  var image = {
+	    url: 'img/flag.png',
+	    // This marker is 20 pixels wide by 32 pixels high.
+	    size: new google.maps.Size(20, 32),
+	    // The origin for this image is (0, 0).
+	    origin: new google.maps.Point(0, 0),
+	    // The anchor for this image is the base of the flagpole at (0, 32).
+	    anchor: new google.maps.Point(0, 32)
+	  };
+	  for(var i=0; i<cercanos.length; i++) {
+		var sitio = cercanos[i];
+		console.log("Agregando marcador en:");
+		console.log(sitio);
+		var marker = new google.maps.Marker({
+			position: {
+					lat: sitio.lat,
+					lng: sitio.lng
+				},
+			map: mapa,
+			title: sitio.desc,
+			icon: image,
+			animation: google.maps.Animation.DROP
+		});			
+	  }
+	}
+
+	function getPosicionesCercanas(posicion, intCant) {
+		var desde = 10;
+		var hasta = 20;		
+		var prop = 8000;		
+
+		var posiciones = [];
+		for(var i=0 ; i<intCant; i++) {
+			var rndLat = (intCant%2 == 0? 1: -1)*Math.floor(Math.random() * hasta) + desde;
+	 		var rndLng = (intCant%2 == 0? 1: -1)*Math.floor(Math.random() * hasta) + desde;
+			var pos = {
+				lat: posicion.lat + rndLat/prop,
+				lng: posicion.lng + rndLng/prop,
+				desc: 'Punto_' + i
+			};
+			posiciones.push(pos);
+		}
+		return posiciones;
+	}
+
+
+    </script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAwZBEr6Rvmx8bfCokCuO8diYTQJmwbcJo&callback=initMap"
+    async defer></script>
