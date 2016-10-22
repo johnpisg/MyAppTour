@@ -2,15 +2,13 @@
 <div class="main">                  
   <section class="bg-gris" id="gallery-list">
       <div class="container">
-          <div class="row">     
-                  
-              
+          <div class="row">
             <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="sitio in modelo.sitios">
-                <div class="item-slide-galerias text-center-min">
+                <div class="item-slide-galerias text-center-min" style="border-bottom:1px dotted grey;">
                     <div class="row">
                         <div class="col-sm-12 col-xs-5">
                             <div class="img-galeria">
-                                <a href="/#detalle_sitio">
+                                <a href="/#detalle_sitio/{{sitio.id}}">
                                     <img ng-src="{{sitio.imagen}}" class="img-responsive">
                                 </a>
                             </div>
@@ -27,8 +25,8 @@
                                     <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </h5>
                                 <p>
-                                    {{sitio.descripcion}}
-                                    <a href="#/detalle_sitio" class="link-more">
+                                    {{sitio.descripcion | limitTo:70 }}..
+                                    <a href="#/detalle_sitio/{{sitio.id}}" class="link-more">
                                         <span class="link-text">Ver Sitio</span>
                                         <span class="text-blue"><i class="fa fa-chevron-right"></i></span>
                                     </a>
@@ -38,7 +36,9 @@
                     </div>
                 </div>
             </div>
-
+          </div>
+          <div class="row">
+              &nbsp;
           </div>
     </div>
     </section>

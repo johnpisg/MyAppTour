@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/sidebar.css">
         <link rel="stylesheet" type="text/css" href="css/app.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-dialog.css">
         
         <!-- jQuery -->
         <script src="js/jquery.min.js"></script>
@@ -54,13 +55,17 @@
         <script src="angular/angular-animate.js"></script>
         <script src="angular/angular-sanitize.js"></script>
         <script src="angular/ui-bootstrap-tpls-2.1.4.js"></script>
+        <script src="js/bootstrap-dialog.js"></script>
+        
                 
         <script src="js/appang.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/controllers.js"></script>
     </head>
 
     <body ng-app="clientws" onload="onLoad();">
         <!-- Fixed navbar -->
-        <div class="navbar navbar-default navbar-fixed-top">
+        <div id="navmenu" class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
               <div class="navbar-header">
                 <button type="button" class="navbar-toggle toggle-left hidden-lg" data-toggle="sidebar" data-target=".sidebar">
@@ -73,7 +78,7 @@
             </div>
         </div>
         
-        <div class="container">
+        <div id="contmenu" class="container">
         <div class="row">
           <div class="col-xs-7 col-sm-3 col-md-2 sidebar sidebar-left sidebar-animate sidebar-show-lg">
             <ul class="nav navbar-stacked menu">
@@ -99,6 +104,20 @@
                 setTimeout(function(){
                     $(".sidebar").toggleClass("sidebar-open");        
                 }, 500);                
+            });
+            
+            $(document).ready(function() {
+                $(".dg").click(function(e){
+                    e.preventDefault();
+                    var url = $(this).attr("href");
+                    var tit = $(this).attr("title");
+                    
+                    BootstrapDialog.show({
+                        title: tit,
+                        message: $("<frame src=" + url +"></frame>"),
+                        cssClass: 'login-dialog'
+                    }); 
+                });
             });
             
         </script>
