@@ -1,32 +1,37 @@
 clientws.controller('mainController', ["$scope", "restful", function($scope, restful) {
         $scope.modelo = {
-          mensaje: "Hola mundo!"
+          mensaje: ""
         };
-        
+    
+        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
+    
         var sitio = {
-            nombre: "Mi Sitio",
-            titulo: "Sitio Exclusivo",
-            descripcion: "Algun texto descriptivo de este sitio aquí.",
-            ranking: 3,
-            imagen: "img/chiquimula3.jpg"
+            nombre: "",
+            titulo: "",
+            descripcion: "",
+            ranking: 0,
+            imagen: ""            
         };
     
         $scope.modelo.sitios = [];
+    
+        $scope.getImagenUrl = function(sitio){
+            if(sitio.imagenes.length > 0) {
+                var imgUrl = sitio.imagenes[0];
+                imgUrl = imgUrl.replace("~/", "");
+                return $scope.siteImages + imgUrl;
+            }
+            return "";
+        };
         
         $scope.loadSitios = function() {
+            console.log("loadSitios");
             $scope.modelo.sitios = [];
-            /*
-            for(var i=1; i<10; i++) {
-                var newSitio = $.extend(true, {}, sitio);    
-                newSitio.titulo = newSitio.titulo + "[" + i + "]";
-                $scope.modelo.sitios.push(newSitio);
-            }
-            */
-            
-            restful.get("sitios", function(data){
-                $scope.modelo.sitios = data;    
+            restful.get("api/sitio/", function(data){
+                $scope.modelo.sitios = data; 
+                console.log(data);
             });
-        }
+        };
         
         $scope.loadSitios();
     
@@ -72,13 +77,30 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
             datos: "Dirección y ubcación aquí: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptate, soluta deserunt illum eaque quaerat? Aliquid assumenda sit, placeat, ea dicta quae ipsam quisquam quia, nisi et tenetur numquam modi! Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
             masdatos: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptate, soluta deserunt illum eaque quaerat? Aliquid assumenda sit, placeat, ea dicta quae ipsam quisquam quia, nisi et tenetur numquam modi! Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
             horario: "Abierto todo el día",
-            precio: "Q. 0.00 GRATIS"
+            precio: "Q. 0.00 GRATIS",
+            userRating: 0,
+            desactivarRating: false 
         };
     
         $scope.loadSitio = function() {
-            restful.get("sitios/" + $routeParams.id, function(data){
+            /*restful.get("api/sitio/" + $routeParams.id, function(data){
                 $scope.sitio = data;    
-            });    
+            });*/
+            
+        };
+    
+        $scope.ratedCallback = function() {
+            console.log($scope.sitio.userRating);
+            //Llamar al WS de ranking
+            var dataToSend = {
+                SitioId: $scope.sitio.id,
+                RankingActual: 0,
+                Rank: $scope.sitio.userRating
+            };
+            restful.rank("api/sitio/", dataToSend, function(data){
+               console.log(data); 
+               $scope.sitio.desactivarRating = true;
+            });            
         };
         
         $scope.openComment = function() {

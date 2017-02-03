@@ -15,6 +15,15 @@
             <div class="container posr text-center visible-xs mt-30">
                 <h1 class="text-marron-dark">{{sitio.titulo}}</h1>
             </div>
+            <div class="container text-center">
+                <style>
+                    .ngrateit-star{
+                        background-size: 32px;
+                    }
+                </style>
+                <ng-rate-it ng-model="sitio.userRating" read-only="sitio.desactivarRating" resetable="false" min="0" max="5" step="1" star-width="32" star-height="32" class="bigstar" rated="ratedCallback" ></ng-rate-it>
+                {{sitio.userRating}}
+            </div>
             <div class="text-center visible-xs mt-30">
                 <a class="btn btn-primary" href="#/photoslider">Ver fotos</a>&nbsp;&nbsp;<a class="btn btn-primary" href="#/photoslider">Ver videos</a>
             </div>
