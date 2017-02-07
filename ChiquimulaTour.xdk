@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "8347b552-4b14-40c4-9e8a-627227ed198b",
-      "lastModifiedDate": 1476052917145,
+      "lastModifiedDate": 1486176508525,
       "creationDate": 1475977401878
     },
     "XDK-app-designer": "false",
@@ -120,6 +120,29 @@
           ]
         },
         "description": "Cordova Geolocation Plugin",
+        "data": {},
+        "dependedBy": []
+      },
+      {
+        "id": "cordova-plugin-uniquedeviceid",
+        "name": "UniqueDeviceID",
+        "version": "1.3.2",
+        "originType": "cordova.io",
+        "origin": "cordova-plugin-uniquedeviceid",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova-plugin-uniquedeviceid",
+        "selectedState": "Included",
+        "checksum": "654e5a9d",
+        "dependsOn": [],
+        "topLevel": true,
+        "cordovaVersion": ">=3.0.0",
+        "permissions": {
+          "android:name": [
+            "android.permission.READ_PHONE_STATE"
+          ]
+        },
+        "description": "\n        PhoneGap / Cordova unique device id (UUID) plugin for Android, iOS and Windows Phone 8. Remains the same after app uninstall.\n    ",
         "data": {},
         "dependedBy": []
       }

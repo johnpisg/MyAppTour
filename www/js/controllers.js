@@ -1,4 +1,9 @@
-clientws.controller('mainController', ["$scope", "restful", function($scope, restful) {
+clientws.controller('mainController', ["$scope", "restful", "uniqueDevice",
+   function($scope, restful, uniqueDevice) {
+       
+        //Obtener el UUID
+        uniqueDevice.get();
+       
         $scope.modelo = {
           mensaje: ""
         };
@@ -30,14 +35,17 @@ clientws.controller('mainController', ["$scope", "restful", function($scope, res
             restful.get("api/sitio/", function(data){
                 $scope.modelo.sitios = data; 
                 console.log(data);
+                $("#load-div").hide();
             });
+            
         };
         
         $scope.loadSitios();
     
     }]);
 
-clientws.controller('top5Controller', function($scope) {
+clientws.controller('top5Controller', ["$scope", "uniqueDevice", 
+   function($scope, uniqueDevice) {
         $scope.modelo = {
           mensaje: "Hola mundo!"
         };
@@ -63,9 +71,9 @@ clientws.controller('top5Controller', function($scope) {
         
         $scope.loadSitios();
     
-    });
+    }]);
 
-clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$log", "$document", "$routeParams", function($scope, restful, $uibModal, $log, $document, $routeParams){
+clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$log", "$document", "$routeParams", "uniqueDevice", function($scope, restful, $uibModal, $log, $document, $routeParams, uniqueDevice){
         $scope.sitio = {
             id: $routeParams.id,
             nombre: "Mi Sitio",
@@ -82,14 +90,16 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
             desactivarRating: false 
         };
     
+        
         $scope.loadSitio = function() {
             /*restful.get("api/sitio/" + $routeParams.id, function(data){
                 $scope.sitio = data;    
             });*/
-            
+            $scope.uuid = uniqueDevice.get();
         };
     
         $scope.ratedCallback = function() {
+            console.log(uniqueDevice.get());
             console.log($scope.sitio.userRating);
             //Llamar al WS de ranking
             var dataToSend = {
@@ -116,7 +126,7 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
     
         $scope.loadSitio();
     
-    }]);
+}]);
 
 clientws.controller('cercanoController', function($scope){
         $scope.modelo = {
@@ -148,8 +158,9 @@ clientws.controller('cercanoController', function($scope){
         
         $scope.loadSitios();
         $scope.getPosicion();
-    })
-    .controller('sliderController', function($scope){
+    });
+    
+clientws.controller('sliderController', function($scope){
           $scope.myInterval = 5000;
           $scope.noWrapSlides = false;
           $scope.active = 0;
@@ -207,7 +218,8 @@ clientws.controller('cercanoController', function($scope){
           }        
     });
 
-clientws.controller('CommentController', function($scope, $interval, $uibModalInstance) {
+clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInstance", "uniqueDevice",
+  function($scope, $interval, $uibModalInstance, uniqueDevice) {
         $scope.modelo = {
             desc: "",
             rank: 0
@@ -234,4 +246,9 @@ clientws.controller('CommentController', function($scope, $interval, $uibModalIn
         $scope.cancelar = function() {
             $uibModalInstance.dismiss();    
         };
-    });
+    }]);
+
+clientws.controller('videosController', ["$scope",
+ function($scope){
+     $scope.titulo = "Videos del sitio"                                        
+ }]);

@@ -23,6 +23,10 @@ var clientws = angular
           controller:'sliderController',
           templateUrl:'views/photoslider.html'
         })
+        .when('/videos', {
+          controller:'videosController',
+          templateUrl:'views/videos.html'
+        })
         .otherwise({
           redirectTo:'/'
         });

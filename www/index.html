@@ -31,6 +31,7 @@
         <link rel="stylesheet" type="text/css" href="css/app.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap-dialog.css">
         <link rel="stylesheet" type="text/css" href="css/ng-rate.css">
+        <link rel="stylesheet" type="text/css" href="css/mediaelementplayer.css">
         
         <!-- jQuery -->
         <script src="js/jquery.min.js"></script>
@@ -63,6 +64,9 @@
         <script src="js/services.js"></script>
         <script src="js/controllers.js"></script>
         <script src="js/directives.js"></script>
+        
+        <script src="js/mediaelementplayer.js"></script>
+        
     </head>
 
     <body ng-app="clientws" onload="onLoad();">
@@ -93,10 +97,21 @@
                 <li>
                     <a href="#/mascercano"><span class="text-verde"><i class="fa fa-child" aria-hidden="true"></i></span><span>  Más cercanos</span></a>
                 </li>
+                <li>
+                  <a href="#/videos"><span class="text-verde"><i class="fa fa-bars" aria-hidden="true"></i></span><span>  Videos</span></a>
+                </li>
             </ul>
           </div>
         </div>
         </div>
+        
+        <div id="load-div" class="vertical-center">
+            <div class="container">
+                <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+                <span class="sr-only">Cargando...</span>
+            </div>
+        </div>
+        
         
         <!-- Begin page content -->
         <div ng-view></div>        
