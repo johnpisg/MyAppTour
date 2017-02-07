@@ -7,6 +7,7 @@
             </div>
             <div class="row">
                 &nbsp;&nbsp;&nbsp; Código: #{{sitio.id}}
+                &nbsp;UUI: '{{uuid}}'
             </div>
             <p class="text-center visible-xs mt-30">
                 <a class="btn btn-primary" href="mapa.html" class="link-more text-blue">Ver Mapa <span><i class="fa fa-map-marker"></i></span></a>&nbsp;
@@ -15,8 +16,18 @@
             <div class="container posr text-center visible-xs mt-30">
                 <h1 class="text-marron-dark">{{sitio.titulo}}</h1>
             </div>
+            <div class="container text-center">
+                <style>
+                    .ngrateit-star{
+                        background-size: 32px;
+                    }
+                </style>
+                <ng-rate-it ng-model="sitio.userRating" read-only="sitio.desactivarRating" resetable="false" min="0" max="5" step="1" star-width="32" star-height="32" class="bigstar" rated="ratedCallback" ></ng-rate-it>
+                {{sitio.userRating}}
+            </div>
             <div class="text-center visible-xs mt-30">
-                <a class="btn btn-primary" href="#/photoslider">Ver fotos</a>&nbsp;&nbsp;<a class="btn btn-primary" href="#/photoslider">Ver videos</a>
+                <a class="btn btn-primary" href="#/photoslider">Ver fotos</a>&nbsp;&nbsp;
+                <a class="btn btn-primary" href="#/videos">Ver videos</a>
             </div>
         </div>
           <section class="">
@@ -57,6 +68,7 @@
                     <h4>Comentar acerca de este sitio:</h4>
                 </div>
             </div>
+            <!-- 
             <div class="row">
                 <div class="col-xs-12">
                     <span uib-rating ng-model="modelo.rank" max="5" read-only="false" 
@@ -65,6 +77,7 @@
                         titles="['Uno','Dos','Tres','Cuatro','Cinco']" aria-labelledby="default-rating"></span>
                 </div>
             </div>
+            -->
             <div class="row">
                 <div class="col-xs-12">
                     <textarea placeholder="comentario" ng-model="modelo.desc"

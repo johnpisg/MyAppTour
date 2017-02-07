@@ -54,3 +54,24 @@ body {
   background-color: #f5f5f5;
   border-right: 1px solid #eee;
 }
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  
+  display: flex;
+  align-items: center;
+}
+
+#load-div {
+    background-color:cadetblue;
+    opacity: 0.5;
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;  
+    z-index: 999;
+}
+
+#load-div .container {
+    color: red;
+}
