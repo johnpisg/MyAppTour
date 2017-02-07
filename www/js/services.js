@@ -34,20 +34,31 @@ clientws.service('uniqueDevice', function() {
     return {
       name: 'Unique Device ID',
       uniqueDeviceId: '',
-      get:function(){
+      get:function(callback){
           console.log(uniqueDeviceId);
-          if(uniqueDeviceId == '')
-            setTimeout(this._getInner, 500);  
-          else
-              return uniqueDeviceId;
+          if(uniqueDeviceId == '') {
+            var fn = this._getInner;
+            setTimeout( function(){
+             fn(callback);   
+            }, 100);  
+          }
+          else{              
+              if(callback)
+                callback(uniqueDeviceId);
+              else
+                return uniqueDeviceId;
+          }
       },
-      _getInner: function(){
+      _getInner: function(callback){
           console.log("_getInner");
         //this.uniqueDeviceId
         if(window.plugins == null || window.plugins.uniqueDeviceID == null) {
             //Aun no estan cargados,
             console.log("son nulos!");
-            setTimeout(this._getInner, 500);  
+            var fn = this._getInner;
+            setTimeout( function(){
+             fn(callback);   
+            }, 100);  
             return '';
         }  
           
@@ -55,6 +66,7 @@ clientws.service('uniqueDevice', function() {
             console.log("UUID = " + uuid);
             uniqueDeviceId = uuid;
             console.log(uniqueDeviceId);
+            callback(uuid);
         }
         var fail = function(err){
             console.error("ERROR = " + err);

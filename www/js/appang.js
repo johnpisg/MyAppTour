@@ -1,7 +1,6 @@
 var clientws = angular
     .module('clientws', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
     .config(function($routeProvider) {
-        
         $routeProvider
         .when('/', {
           controller:'mainController',
@@ -30,5 +29,12 @@ var clientws = angular
         .otherwise({
           redirectTo:'/'
         });
+    })
+.run(function($rootScope) {
+    $rootScope.$on("$locationChangeStart", function(event, next, current) { 
+        // handle route changes     
+        console.log("Cambio de página");
+        $("#load-div").show();
     });
+});
     

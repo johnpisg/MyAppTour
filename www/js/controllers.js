@@ -1,14 +1,9 @@
 clientws.controller('mainController', ["$scope", "restful", "uniqueDevice",
    function($scope, restful, uniqueDevice) {
        
-        //Obtener el UUID
-        uniqueDevice.get();
-       
         $scope.modelo = {
           mensaje: ""
         };
-    
-        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
     
         var sitio = {
             nombre: "",
@@ -20,6 +15,7 @@ clientws.controller('mainController', ["$scope", "restful", "uniqueDevice",
     
         $scope.modelo.sitios = [];
     
+        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
         $scope.getImagenUrl = function(sitio){
             if(sitio.imagenes.length > 0) {
                 var imgUrl = sitio.imagenes[0];
@@ -31,21 +27,25 @@ clientws.controller('mainController', ["$scope", "restful", "uniqueDevice",
         
         $scope.loadSitios = function() {
             console.log("loadSitios");
+            var uuid = uniqueDevice.get();
+            console.log("device unique Id para enviar es = " + uuid);
             $scope.modelo.sitios = [];
-            restful.get("api/sitio/", function(data){
+            restful.get("api/sitio?deviceUniqueId=" + uuid, function(data){
                 $scope.modelo.sitios = data; 
                 console.log(data);
                 $("#load-div").hide();
-            });
-            
+            });            
         };
         
-        $scope.loadSitios();
+       //Obtener el UUID, llamar desde el splash
+        uniqueDevice.get(function(uuid){
+            $scope.loadSitios();
+        });
     
     }]);
 
-clientws.controller('top5Controller', ["$scope", "uniqueDevice", 
-   function($scope, uniqueDevice) {
+clientws.controller('top5Controller', ["$scope", "uniqueDevice", "restful", 
+   function($scope, uniqueDevice, restful) {
         $scope.modelo = {
           mensaje: "Hola mundo!"
         };
@@ -60,13 +60,33 @@ clientws.controller('top5Controller', ["$scope", "uniqueDevice",
     
         $scope.modelo.sitios = [];
         
+        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
+        $scope.getImagenUrl = function(sitio){
+            if(sitio.imagenes.length > 0) {
+                var imgUrl = sitio.imagenes[0];
+                imgUrl = imgUrl.replace("~/", "");
+                return $scope.siteImages + imgUrl;
+            }
+            return "";
+        };
+       
         $scope.loadSitios = function() {
+            console.log("TOP 5 loadSitios");
+            var top = 5;
+            var uuid = uniqueDevice.get();
+            console.log("device unique Id para enviar es = " + uuid);
             $scope.modelo.sitios = [];
+            restful.get("api/sitio?deviceUniqueId=" + uuid + "&number=" + top, function(data){
+                $scope.modelo.sitios = data; 
+                console.log(data);
+                $("#load-div").hide();
+            });
+            /*$scope.modelo.sitios = [];
             for(var i=1; i<5; i++) {
                 var newSitio = $.extend(true, {}, sitio);    
                 newSitio.titulo = newSitio.titulo + "[" + i + "]";
                 $scope.modelo.sitios.push(newSitio);
-            }
+            }*/
         }
         
         $scope.loadSitios();
@@ -92,20 +112,23 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
     
         
         $scope.loadSitio = function() {
-            /*restful.get("api/sitio/" + $routeParams.id, function(data){
-                $scope.sitio = data;    
-            });*/
             $scope.uuid = uniqueDevice.get();
+            restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
+                $scope.sitio = data;  
+                $("#load-div").hide();
+            });            
         };
     
         $scope.ratedCallback = function() {
             console.log(uniqueDevice.get());
             console.log($scope.sitio.userRating);
+            $scope.uuid = uniqueDevice.get();
             //Llamar al WS de ranking
             var dataToSend = {
                 SitioId: $scope.sitio.id,
                 RankingActual: 0,
-                Rank: $scope.sitio.userRating
+                Rank: $scope.sitio.userRating,
+                DeviceId: $scope.uuid
             };
             restful.rank("api/sitio/", dataToSend, function(data){
                console.log(data); 
@@ -237,7 +260,7 @@ clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInsta
             }, 500);
         };
         
-        $scope.animar();
+        //$scope.animar();
     
         $scope.guardar = function() {
             $uibModalInstance.close();
@@ -251,4 +274,5 @@ clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInsta
 clientws.controller('videosController', ["$scope",
  function($scope){
      $scope.titulo = "Videos del sitio"                                        
+     $("#load-div").hide();
  }]);
