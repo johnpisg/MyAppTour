@@ -173,6 +173,7 @@ clientws.controller('cercanoController', function($scope){
                 newSitio.titulo = newSitio.titulo + "[" + i + "]";
                 $scope.modelo.sitios.push(newSitio);
             }
+            $("#load-div").hide();
         }
         
         $scope.getPosicion = function() {
@@ -181,6 +182,7 @@ clientws.controller('cercanoController', function($scope){
         
         $scope.loadSitios();
         $scope.getPosicion();
+        
     });
     
 clientws.controller('sliderController', function($scope){
@@ -207,6 +209,7 @@ clientws.controller('sliderController', function($scope){
           for (var i = 0; i < 4; i++) {
             $scope.addSlide();
           }
+            $("#load-div").hide();
 
           // Randomize logic below
 

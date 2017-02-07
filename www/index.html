@@ -96,10 +96,7 @@
                 </li>
                 <li>
                     <a href="#/mascercano"><span class="text-verde"><i class="fa fa-child" aria-hidden="true"></i></span><span>  Más cercanos</span></a>
-                </li>
-                <li>
-                  <a href="#/videos"><span class="text-verde"><i class="fa fa-bars" aria-hidden="true"></i></span><span>  Videos</span></a>
-                </li>
+                </li>                
             </ul>
           </div>
         </div>
@@ -113,14 +110,15 @@
         </div>        
         
         <!-- Begin page content -->
-        <div ng-view></div>        
+        <div ng-view autoscroll="true"></div>        
         
-        <div class="align-center" >
+        
+        <!--<div class="align-center" >
             <textarea id="txtconsole" class="align-left" style="height:35rem; width:90%" readonly="readonly" wrap="off"></textarea>
-        </div>
+        </div>-->
         
         <script type="text/javascript">
-            var console = {};
+            /*var console = {};
             var appendText = function(str){
                   $('#txtconsole').append(str + "\n");  
                   $("#txtconsole").animate({
@@ -130,7 +128,7 @@
             };            
             console.log = function(str) {
                 appendText(str);
-            };
+            };*/
             
             $(".menu a").click(function(){
                 setTimeout(function(){
