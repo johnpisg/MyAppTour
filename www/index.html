@@ -115,7 +115,23 @@
         <!-- Begin page content -->
         <div ng-view></div>        
         
+        <div class="align-center" >
+            <textarea id="txtconsole" class="align-left" style="height:35rem; width:90%" readonly="readonly" wrap="off"></textarea>
+        </div>
+        
         <script type="text/javascript">
+            var console = {};
+            var appendText = function(str){
+                  $('#txtconsole').append(str + "\n");  
+                  $("#txtconsole").animate({
+                      scrollTop:$("#txtconsole")[0].scrollHeight - $("#txtconsole").height()
+                    },100,function(){      
+                  });
+            };            
+            console.log = function(str) {
+                appendText(str);
+            };
+            
             $(".menu a").click(function(){
                 setTimeout(function(){
                     $(".sidebar").toggleClass("sidebar-open");        

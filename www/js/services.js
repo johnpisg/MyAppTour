@@ -32,14 +32,27 @@ clientws.factory('restful', function($http) {
 clientws.service('uniqueDevice', function() {
     uniqueDeviceId = '';
     return {
-      name: 'Unique Device ID',
-      uniqueDeviceId: '',
-      get:function(callback){
+      name: 'Unique Device ID',    
+      get:function(callback) {
+          if(window.device) {              
+            uniqueDeviceId = window.device.uuid;
+            if(callback)
+                callback(uniqueDeviceId);
+            else
+                return uniqueDeviceId;          
+          }else {
+              var fn = this.get;
+              setTimeout(function(){
+                  fn(callback);
+              }, 500);
+          }
+      },
+      get_1:function(callback){
           console.log(uniqueDeviceId);
           if(uniqueDeviceId === '') {
             var fn = this._getInner;
             setTimeout( function(){
-             fn(callback);   
+             fn(fn, callback);   
             }, 500);  
           }
           else{              
@@ -49,18 +62,28 @@ clientws.service('uniqueDevice', function() {
                 return uniqueDeviceId;
           }
       },
-      _getInner: function(callback){
-          console.log("_getInner");
-        //this.uniqueDeviceId
-        if(window.plugins === null || window.plugins.uniqueDeviceID === null) {
+      _getInner_1: function(fnGetInner, callback){
+        console.log("_getInner");
+        console.log("if nulls..");
+          console.log("windows es = " + window);
+          console.log("window.plugins es = " + window.plugins);
+          /*console.log("window.plugins.uniqueDeviceID es = " + window.plugins.uniqueDeviceID);
+          console.log("if nulls then..");*/
+        if(!(window.plugins && window.plugins.uniqueDeviceID)) {
             //Aun no estan cargados,
-            console.log("son nulos!");
-            var fn = this._getInner;
+            console.log("son nulos objects!");
+            var fn = fnGetInner;
+            console.log("Objeto this es " + this);
+            console.log("funcion es " + fn);
+            console.log("callback es " + callback);
             setTimeout( function(){
-             fn(callback);   
+                console.log("Llamando... ");
+                fn(fn, callback);   
             }, 500);  
+            console.log("retun empty");
             return '';
         }  
+        console.log("NO son nulos!");  
           
         var success = function(uuid) {
             console.log("UUID = " + uuid);
@@ -70,7 +93,9 @@ clientws.service('uniqueDevice', function() {
         };
         var fail = function(err){
             console.error("ERROR = " + err);
-        };        
+        };      
+        console.log("llamando a ");  
+        console.log(window.plugins.uniqueDeviceID);
         window.plugins.uniqueDeviceID.get(success, fail);
       }
     };
