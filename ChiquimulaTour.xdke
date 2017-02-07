@@ -9,16 +9,20 @@
     "currentEditorMode": 0
   },
   "build-tab": {
-    "selectedTargets": [
-      "CORDOVA_ANDROID"
-    ]
+    "selectedTargets": []
   },
   "simulator": {
     "cordova-simulate": {
       "tinyhippos-geosettings": {
         "id": "tinyhippos-geosettings",
         "key": "geosettings",
-        "value": "{\"position\":{\"latitude\":43.465187,\"longitude\":-80.522372,\"altitude\":100,\"accuracy\":150,\"altitudeAccuracy\":80,\"heading\":0,\"speed\":0,\"timeStamp\":\"new Date(1486053807842)\"},\"delay\":\"0\",\"timeout\":false}",
+        "value": "{\"position\":{\"latitude\":43.465187,\"longitude\":-80.522372,\"altitude\":100,\"accuracy\":150,\"altitudeAccuracy\":80,\"heading\":0,\"speed\":0,\"timeStamp\":\"new Date(1486487721384)\"},\"delay\":\"0\",\"timeout\":false}",
+        "prefix": "tinyhippos-"
+      },
+      "tinyhippos-saved-sims": {
+        "id": "tinyhippos-saved-sims",
+        "key": "saved-sims",
+        "value": "[{\"service\":\"UniqueDeviceID\",\"action\":\"get\",\"args\":[],\"value\":12345,\"success\":true}]",
         "prefix": "tinyhippos-"
       }
     }

@@ -2,7 +2,7 @@ clientws.factory('restful', function($http) {
     return{
       name: 'Sitios Service',
       get: function(url, callback){
-        var baseurl = "http://city-tour-chiquimula-ws.somee.com/"
+        var baseurl = "http://city-tour-chiquimula-ws.somee.com/";
         $http
             .get(baseurl + url)
             .success(function(data) {
@@ -13,7 +13,7 @@ clientws.factory('restful', function($http) {
             });
       },
       rank: function(url, dto, callback) {
-       var baseurl = "http://city-tour-chiquimula-ws.somee.com/"
+       var baseurl = "http://city-tour-chiquimula-ws.somee.com/";
        $http
             .post(baseurl + url, dto)
             .success(function(data) {
@@ -36,11 +36,11 @@ clientws.service('uniqueDevice', function() {
       uniqueDeviceId: '',
       get:function(callback){
           console.log(uniqueDeviceId);
-          if(uniqueDeviceId == '') {
+          if(uniqueDeviceId === '') {
             var fn = this._getInner;
             setTimeout( function(){
              fn(callback);   
-            }, 100);  
+            }, 500);  
           }
           else{              
               if(callback)
@@ -52,13 +52,13 @@ clientws.service('uniqueDevice', function() {
       _getInner: function(callback){
           console.log("_getInner");
         //this.uniqueDeviceId
-        if(window.plugins == null || window.plugins.uniqueDeviceID == null) {
+        if(window.plugins === null || window.plugins.uniqueDeviceID === null) {
             //Aun no estan cargados,
             console.log("son nulos!");
             var fn = this._getInner;
             setTimeout( function(){
              fn(callback);   
-            }, 100);  
+            }, 500);  
             return '';
         }  
           
@@ -67,10 +67,10 @@ clientws.service('uniqueDevice', function() {
             uniqueDeviceId = uuid;
             console.log(uniqueDeviceId);
             callback(uuid);
-        }
+        };
         var fail = function(err){
             console.error("ERROR = " + err);
-        }        
+        };        
         window.plugins.uniqueDeviceID.get(success, fail);
       }
     };
