@@ -9,14 +9,16 @@
     "currentEditorMode": 0
   },
   "build-tab": {
-    "selectedTargets": []
+    "selectedTargets": [
+      "CORDOVA_ANDROID"
+    ]
   },
   "simulator": {
     "cordova-simulate": {
       "tinyhippos-geosettings": {
         "id": "tinyhippos-geosettings",
         "key": "geosettings",
-        "value": "{\"position\":{\"latitude\":43.46518699999994,\"longitude\":-80.52237200000009,\"altitude\":100,\"accuracy\":150,\"altitudeAccuracy\":80,\"heading\":0,\"speed\":0,\"timeStamp\":\"new Date(1486594570645)\"},\"delay\":\"0\",\"timeout\":false}",
+        "value": "{\"position\":{\"latitude\":-85.04986310802276,\"longitude\":14.72874952099678,\"altitude\":100,\"accuracy\":150,\"altitudeAccuracy\":80,\"heading\":0,\"speed\":0,\"timeStamp\":\"new Date(1486597017096)\"},\"delay\":\"0\",\"timeout\":false}",
         "prefix": "tinyhippos-"
       },
       "tinyhippos-saved-sims": {
@@ -28,7 +30,7 @@
       "tinyhippos-geo-map-zoom-key": {
         "id": "tinyhippos-geo-map-zoom-key",
         "key": "geo-map-zoom-key",
-        "value": 14,
+        "value": 8,
         "prefix": "tinyhippos-"
       }
     }
