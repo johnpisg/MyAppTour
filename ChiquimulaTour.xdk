@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "8347b552-4b14-40c4-9e8a-627227ed198b",
-      "lastModifiedDate": 1486498703591,
+      "lastModifiedDate": 1486594406258,
       "creationDate": 1475977401878
     },
     "XDK-app-designer": "false",
@@ -137,7 +137,7 @@
         },
         "isActive_": true,
         "certificateId_": "vRUvKgQ70Umh8LZex_pYqg2",
-        "appName_": "ChiquimulaTour",
+        "appName_": "Citytour Chiquimula",
         "appID_": "xdk.intel.cordova.template.lite",
         "appAccess_": {
           "mode": "whitelist",
@@ -217,8 +217,8 @@
         "excludedLibraries_": "",
         "cordovaCLIVersion_": "6.2.0",
         "crosswalkVersion_": "19",
-        "appVersion_": "0.0.1",
-        "appDescription_": "Universal init code for Intel XDK and Cordova device ready detection, as well as within browser.",
+        "appVersion_": "0.0.2",
+        "appDescription_": "Citytour Chiquimula",
         "appAuthor_": "Intel XDK",
         "appVersionCode_": "1",
         "signed_": true

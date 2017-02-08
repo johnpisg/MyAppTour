@@ -279,3 +279,37 @@ clientws.controller('videosController', ["$scope",
      $scope.titulo = "Videos del sitio"                                        
      $("#load-div").hide();
  }]);
+
+clientws.controller('mapaController', ["$scope", "restful", "$uibModal", "$log", "$document", "$routeParams", "uniqueDevice", function($scope, restful, $uibModal, $log, $document, $routeParams, uniqueDevice){
+        $scope.sitio = {
+            id: $routeParams.id,
+            nombre: "Mi Sitio",
+            titulo: "Sitio Exclusivo",
+            descripcion: "Algun texto descriptivo de este sitio aquí.",
+            ranking: 3,
+            imagen: "img/chiquimula3.jpg",
+            info: "Información turística aquí: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptate, soluta deserunt illum eaque quaerat? Aliquid assumenda sit, placeat, ea dicta quae ipsam quisquam quia, nisi et tenetur numquam modi! Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+            datos: "Dirección y ubcación aquí: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptate, soluta deserunt illum eaque quaerat? Aliquid assumenda sit, placeat, ea dicta quae ipsam quisquam quia, nisi et tenetur numquam modi! Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+            masdatos: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias voluptate, soluta deserunt illum eaque quaerat? Aliquid assumenda sit, placeat, ea dicta quae ipsam quisquam quia, nisi et tenetur numquam modi! Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+            horario: "Abierto todo el día",
+            precio: "Q. 0.00 GRATIS",
+            userRating: 0,
+            desactivarRating: false 
+        };
+    
+        
+        $scope.loadSitio = function() {
+            $scope.uuid = uniqueDevice.get();
+            restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
+                $scope.sitio = data;  
+                $("#load-div").hide();
+            });            
+        };
+    
+        $scope.ratedCallback = function() {
+                
+        };
+    
+        $scope.loadSitio();
+    
+}]);

@@ -41,9 +41,7 @@ function onLoad() {
 }
 
 function onAppReady() {
-    console.log("onAppReady Ready!!!");
-    console.log(window.plugins.uniqueDeviceID);
-    console.log("Eso fue window.plugins.uniqueDeviceID");
+    console.log("onAppReady Ready!!!");    
 }
 
 document.addEventListener("app.Ready", onAppReady, false) ;
