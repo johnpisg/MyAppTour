@@ -36,6 +36,9 @@
 <preference name="android-installLocation" value="auto"/>
 <preference name="android-signed" value="true"/>
 <intelxdk:crosswalk version="19"/>
+<preference name="android-permission" value="android.permission.ACCESS_COARSE_LOCATION"/>
+<preference name="android-permission" value="android.permission.ACCESS_FINE_LOCATION"/>
+<preference name="android-permission" value="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
 <preference name="splashscreen" value="splash"/>
 <!--creationInfo:{"src":"jsapp/template-blank-cordova-project-lite/sample.zip","projectTypeName":"com.intel.xdk.projecttype.jsapp"}-->
 <preference name="debuggable" value="false"/>

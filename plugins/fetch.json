@@ -23,20 +23,20 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-geolocation": {
-        "source": {
-            "type": "local",
-            "path": "/home/jhon/intel/XDK/xdk/components/server/cordova/cordova-plugins/cordova-plugin-geolocation"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-compat": {
         "source": {
             "type": "local",
             "path": "/home/jhon/intel/XDK/xdk/components/server/cordova/cordova-plugins/cordova-plugin-compat"
         },
         "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-geolocation": {
+        "source": {
+            "type": "local",
+            "path": "/home/jhon/intel/XDK/xdk/components/server/cordova/cordova-plugins/cordova-plugin-geolocation"
+        },
+        "is_top_level": true,
         "variables": {}
     }
 }

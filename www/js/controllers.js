@@ -38,7 +38,10 @@ clientws.controller('mainController', ["$scope", "restful", "uniqueDevice",
         };
         
        //Obtener el UUID, llamar desde el splash
+       console.log("llamando GET..");
+       console.log(uniqueDevice);
         uniqueDevice.get(function(uuid){
+            console.log("uui");
             $scope.loadSitios();
         });
     
