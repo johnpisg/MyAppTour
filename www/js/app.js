@@ -53,7 +53,7 @@ function onLoad() {
                 break;
         }
         
-    }, { maximumAge: 0, timeout: 5000, enableHighAccuracy: true });
+    }, { maximumAge: 0, timeout: 10000, enableHighAccuracy: true });
 }
 
 function onDeviceReady() {

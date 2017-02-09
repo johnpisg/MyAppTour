@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "8347b552-4b14-40c4-9e8a-627227ed198b",
-      "lastModifiedDate": 1486609351540,
+      "lastModifiedDate": 1486613908206,
       "creationDate": 1475977401878
     },
     "XDK-app-designer": "false",
@@ -78,27 +78,6 @@
         "checksum": "47137083"
       },
       {
-        "id": "cordova-plugin-compat",
-        "name": "Compat",
-        "version": "1.0.0",
-        "originType": "cordova.io",
-        "origin": "cordova-plugin-compat",
-        "gitref": "",
-        "paramvals": {},
-        "sourceLocation": "plugins/cordova-plugin-compat",
-        "selectedState": "Included",
-        "checksum": "61c62eb",
-        "dependsOn": [],
-        "topLevel": false,
-        "permissions": {},
-        "description": "Cordova Compatibility Plugin",
-        "data": {},
-        "dependedBy": [
-          "cordova-plugin-geolocation"
-        ],
-        "custom": "true"
-      },
-      {
         "id": "cordova-plugin-geolocation",
         "name": "Geolocation",
         "version": "2.2.0",
@@ -122,6 +101,27 @@
         "description": "Cordova Geolocation Plugin",
         "data": {},
         "dependedBy": []
+      },
+      {
+        "id": "cordova-plugin-compat",
+        "name": "Compat",
+        "version": "1.0.0",
+        "originType": "cordova.io",
+        "origin": "cordova-plugin-compat",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova-plugin-compat",
+        "selectedState": "Included",
+        "checksum": "61c62eb",
+        "dependsOn": [],
+        "topLevel": false,
+        "permissions": {},
+        "description": "Cordova Compatibility Plugin",
+        "data": {},
+        "dependedBy": [
+          "cordova-plugin-geolocation"
+        ],
+        "custom": "true"
       }
     ],
     "buildConfigurations": {

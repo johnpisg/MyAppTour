@@ -81,12 +81,28 @@
 			  });			
 
 			mostrarSitiosCercanos(pos, map);
-
 		}, function(errorr) {
             console.log("errorr");
             console.error(errorr);
+            
+            switch(errorr.code)
+            {
+                case 1:
+                    console.log("PERMISSION DENIED");
+                    break;
+                case 2:
+                    console.log("POSITION_UNAVAILABLE");
+                    break;
+                case 3:
+                    console.log("TIMEOUT");
+                    break;
+                default:
+                    console.log("UNKNOWN ERROR");
+                    break;
+            }
+                
 			handleLocationError(true, infoWindow, map.getCenter());
-		});
+		}, { maximumAge: 0, timeout: 10000, enableHighAccuracy: true });
 		} else {
             console.log("unsuportted");
 			// Browser doesn't support Geolocation
