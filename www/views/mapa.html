@@ -16,7 +16,10 @@
 	var map = null;
     var miPosicion = null;
     var posicionSitio = null;
-
+	var directionsDisplay = null;
+	var directionsService  = null;
+	//14.796662, -89.547020
+	
 	function initMap() {
         console.log("Iniciando mapa..");
         
@@ -24,6 +27,18 @@
             lat: parseFloat($("#lat").val()),
             lng: parseFloat($("#lon").val())
         }
+        console.log(posicionSitio);
+        // Create a map object and specify the DOM element for display.
+		map = new google.maps.Map(document.getElementById('map'), {
+		  center: posicionSitio,
+		  scrollwheel: true,
+		  zoom: 7
+		});
+		directionsDisplay = new google.maps.DirectionsRenderer();
+		directionsService  = new google.maps.DirectionsService();
+	
+		console.log("Creando direcciones...");
+        directionsDisplay.setMap(map);
         
 		// Try HTML5 geolocation.
 		if (navigator.geolocation) {
@@ -67,48 +82,38 @@
         console.log("Hasta");
         console.log(posicionSitio);
 		
-        // Create a map object and specify the DOM element for display.
-		map = new google.maps.Map(document.getElementById('map'), {
-		  center: posicionSitio,
-		  scrollwheel: false,
-		  zoom: 16
-		});
-        
-       
-        var infoWindow = new google.maps.InfoWindow({map: map});
+			/*
+			var infoWindow = new google.maps.InfoWindow({map: map});
 			infoWindow.setPosition(pos);
-			infoWindow.setContent('Usted est&aacute; aqu&iacute;.');
-			
+			infoWindow.setContent('Usted est&aacute; aqu&iacute;.');			
 			var marker = new google.maps.Marker({
 			    position: pos,
 			    map: map,
 			    title: 'Desde aquí;',
 			    animation: google.maps.Animation.DROP
-			  });			
-        
-        console.log("Creando direcciones...");
-        var directionsDisplay = new google.maps.DirectionsRenderer({
-          map: map
-        });
+			  });
+			*/
         
         // Set destination, origin and travel mode.
         var request = {
           destination: posicionSitio,
           origin: pos,
-          travelMode: 'DRIVING'
+          travelMode: google.maps.TravelMode.DRIVING
         };
 
          console.log("Creando DirectionsService...");
         // Pass the directions request to the directions service.
-        var directionsService = new google.maps.DirectionsService();
+        
         directionsService.route(request, function(response, status) {
             console.log("response");
             console.log(response);
             console.log(status);
-          if (status == 'OK') {
+          if (status == google.maps.DirectionsStatus.OK) {
             // Display the route on the map.
             directionsDisplay.setDirections(response);
-          }
+          }else {
+			  console.log('Directions request failed due to ' + status);
+			}
         });
         
         /*
@@ -118,9 +123,7 @@
         */
 	}
 
-    </script>
-    
+</script>
 
-<!--
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyARQxFqNLURBkxDBIdDBjnSPNXYabWyu2g&callback=initMap"
-    async defer></script>-->
+    async defer></script>
