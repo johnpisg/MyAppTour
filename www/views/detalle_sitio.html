@@ -3,7 +3,7 @@
       <div class="main">
         <div class="page-header">
             <div class="text-center visible-xs mt-30">
-                <img ng-src="{{sitio.imagen}}" class="img-responsive">
+                <img ng-src="{{getImagenUrl(sitio)}}" class="img-responsive">
             </div>
             <div class="row">
                 &nbsp;&nbsp;&nbsp; Código: #{{sitio.id}}
@@ -26,8 +26,8 @@
                 {{sitio.userRating}}
             </div>
             <div class="text-center visible-xs mt-30">
-                <a class="btn btn-primary" href="#/photoslider">Ver fotos</a>&nbsp;&nbsp;
-                <a class="btn btn-primary" href="#/videos">Ver videos</a>
+                <a class="btn btn-primary" href="#/photoslider/{{sitio.id}}">Ver fotos</a>&nbsp;&nbsp;
+                <a class="btn btn-primary" href="#/videos/{{sitio.id}}">Ver videos</a>
             </div>
         </div>
           <section class="">

@@ -1,4 +1,4 @@
-<div style="height: 100%">
+<div id="cont" style="height: 80%">
 <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
   <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
     <img ng-src="{{slide.image}}" style="margin:auto;">
@@ -9,3 +9,14 @@
   </div>
 </div>
 </div>
+
+<script type="text/javascript">
+
+    $(function(){
+        var alto = $(window).height() - 50;
+        $("#cont").height(alto);
+        $("img").height(alto);
+        console.log(alto);
+    });
+
+</script>

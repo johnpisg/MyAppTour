@@ -18,11 +18,11 @@ var clientws = angular
           controller:'cercanoController',
           templateUrl:'views/mascercano.html'
         })
-        .when('/photoslider', {
+        .when('/photoslider/:id', {
           controller:'sliderController',
           templateUrl:'views/photoslider.html'
         })
-        .when('/videos', {
+        .when('/videos/:id', {
           controller:'videosController',
           templateUrl:'views/videos.html'
         })

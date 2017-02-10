@@ -17,7 +17,7 @@ clientws.controller('mainController', ["$scope", "restful", "uniqueDevice",
     
         $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
         $scope.getImagenUrl = function(sitio){
-            if(sitio.imagenes.length > 0) {
+            if(sitio.imagenes && sitio.imagenes.length > 0) {
                 var imgUrl = sitio.imagenes[0];
                 imgUrl = imgUrl.replace("~/", "");
                 return $scope.siteImages + imgUrl;
@@ -65,7 +65,7 @@ clientws.controller('top5Controller', ["$scope", "uniqueDevice", "restful",
         
         $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
         $scope.getImagenUrl = function(sitio){
-            if(sitio.imagenes.length > 0) {
+            if(sitio.imagenes && sitio.imagenes.length > 0) {
                 var imgUrl = sitio.imagenes[0];
                 imgUrl = imgUrl.replace("~/", "");
                 return $scope.siteImages + imgUrl;
@@ -113,7 +113,16 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
             desactivarRating: false 
         };
     
-        
+        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
+        $scope.getImagenUrl = function(sitio){
+            if(sitio.imagenes && sitio.imagenes.length > 0) {
+                var imgUrl = sitio.imagenes[0];
+                imgUrl = imgUrl.replace("~/", "");
+                return $scope.siteImages + imgUrl;
+            }
+            return "";
+        };
+    
         $scope.loadSitio = function() {
             $scope.uuid = uniqueDevice.get();
             restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
@@ -188,18 +197,40 @@ clientws.controller('cercanoController', function($scope){
         
     });
     
-clientws.controller('sliderController', function($scope){
+clientws.controller('sliderController', ["$scope", "uniqueDevice", "restful", "$routeParams", 
+   function($scope, uniqueDevice, restful, $routeParams) {
           $scope.myInterval = 5000;
           $scope.noWrapSlides = false;
           $scope.active = 0;
-          var slides = $scope.slides = [];
-          var currIndex = 0;
-
-          $scope.addSlide = function() {
-            var newWidth = 600 + slides.length + 1;
+          
+        var slides = $scope.slides = [];
+        var currIndex = 0;
+            
+        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
+        $scope.getImagenesUrl = function(sitio) {
+            for(var i=0; sitio.imagenes && i<sitio.imagenes.length; i++ ){
+                var imgUrl = sitio.imagenes[i]; 
+                imgUrl = imgUrl.replace("~/", "");
+                imgUrl = $scope.siteImages + imgUrl;
+                
+                $scope.addSlide(imgUrl, "Imagen " + (i+1));
+            }
+        };
+    
+        $scope.loadSitio = function() {
+            $scope.uuid = uniqueDevice.get();
+            restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
+                $scope.sitio = data;  
+                console.log(data);
+                $scope.getImagenesUrl(data);
+                $("#load-div").hide();
+            });            
+        };
+    
+          $scope.addSlide = function(url, title) {
             slides.push({
-              image: 'http://unsplash.it/' + newWidth + '/300',
-              text: ['Nice image','Awesome photograph','That is so cool','I love that'][slides.length % 4],
+              image: url,
+              text: title,
               id: currIndex++
             });
           };
@@ -209,10 +240,10 @@ clientws.controller('sliderController', function($scope){
             assignNewIndexesToSlides(indexes);
           };
 
-          for (var i = 0; i < 4; i++) {
+          /*for (var i = 0; i < 4; i++) {
             $scope.addSlide();
           }
-            $("#load-div").hide();
+            $("#load-div").hide();*/
 
           // Randomize logic below
 
@@ -244,8 +275,11 @@ clientws.controller('sliderController', function($scope){
             }
 
             return array;
-          }        
-    });
+          }  
+       
+       $scope.loadSitio();
+       
+    }]);
 
 clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInstance", "uniqueDevice",
   function($scope, $interval, $uibModalInstance, uniqueDevice) {
@@ -277,10 +311,30 @@ clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInsta
         };
     }]);
 
-clientws.controller('videosController', ["$scope",
- function($scope){
-     $scope.titulo = "Videos del sitio"                                        
+clientws.controller('videosController', ["$scope", "$sce", "$routeParams", "restful",
+ function($scope, $sce, $routeParams, restful){
+     $scope.titulo = "Videos del sitio"    
      $("#load-div").hide();
+     
+     $scope.videosUrl = [];
+     
+    $scope.trustSrc = function(src) {
+        return $sce.trustAsResourceUrl(src);
+    };
+     
+     $scope.loadVideosSitio = function() {
+        restful.get("api/video/" + $routeParams.id, function(data){
+            $scope.videosUrl = data;  
+            $("#load-div").hide();
+        });            
+    };
+     
+     $scope.getHideFn = function(index){
+        return "$('.load" + index + "').hide();";    
+     };
+     
+    $scope.loadVideosSitio();
+     
  }]);
 
 clientws.controller('mapaController', ["$scope", "restful", "$uibModal", "$log", "$document", "$routeParams", "uniqueDevice", function($scope, restful, $uibModal, $log, $document, $routeParams, uniqueDevice){
