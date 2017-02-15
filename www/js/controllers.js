@@ -110,7 +110,7 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
             horario: "Abierto todo el día",
             precio: "Q. 0.00 GRATIS",
             userRating: 0,
-            desactivarRating: false 
+            rankear: false 
         };
     
         $scope.siteImages = "http://city-tour-chiquimula.somee.com/";

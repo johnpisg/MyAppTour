@@ -5,7 +5,7 @@
             <div class="text-center visible-xs mt-30">
                 <img ng-src="{{getImagenUrl(sitio)}}" class="img-responsive">
             </div>
-            <div class="row">
+            <div class="row hidee">
                 &nbsp;&nbsp;&nbsp; Código: #{{sitio.id}}
                 &nbsp;UUI: '{{uuid}}'
             </div>
@@ -22,7 +22,9 @@
                         background-size: 32px;
                     }
                 </style>
-                <ng-rate-it ng-model="sitio.userRating" read-only="sitio.desactivarRating" resetable="false" min="0" max="5" step="1" star-width="32" star-height="32" class="bigstar" rated="ratedCallback" ></ng-rate-it>
+                <ng-rate-it ng-model="sitio.userRating" read-only="!sitio.rankear" 
+                            resetable="false" min="0" max="5" step="1" star-width="32" 
+                            star-height="32" class="bigstar" rated="ratedCallback" ></ng-rate-it>
                 {{sitio.userRating}}
             </div>
             <div class="text-center visible-xs mt-30">
