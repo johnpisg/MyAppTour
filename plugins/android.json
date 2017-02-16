@@ -21,10 +21,16 @@
         },
         "cordova.plugins.diagnostic.api-22": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     }

@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "8347b552-4b14-40c4-9e8a-627227ed198b",
-      "lastModifiedDate": 1487263276646,
+      "lastModifiedDate": 1487265488963,
       "creationDate": 1475977401878
     },
     "XDK-app-designer": "false",
@@ -58,7 +58,8 @@
         "gitref": "",
         "name": "Device",
         "description": "Cordova Device Plugin",
-        "checksum": "2373ccea"
+        "checksum": "2373ccea",
+        "cordovaVersion": ">=3.0.0"
       },
       {
         "id": "cordova-plugin-splashscreen",
@@ -75,7 +76,8 @@
         "gitref": "",
         "name": "Splashscreen",
         "description": "Cordova Splashscreen Plugin",
-        "checksum": "47137083"
+        "checksum": "47137083",
+        "cordovaVersion": ">=3.0.0"
       },
       {
         "id": "cordova-plugin-geolocation",
@@ -100,7 +102,8 @@
         },
         "description": "Cordova Geolocation Plugin",
         "data": {},
-        "dependedBy": []
+        "dependedBy": [],
+        "cordovaVersion": ">=3.0.0"
       },
       {
         "id": "cordova-plugin-compat",
@@ -121,7 +124,8 @@
         "dependedBy": [
           "cordova-plugin-geolocation"
         ],
-        "custom": "true"
+        "custom": "true",
+        "cordovaVersion": ">=3.0.0"
       },
       {
         "id": "cordova.plugins.diagnostic.api-22",
@@ -142,6 +146,52 @@
         "description": "Cordova/Phonegap plugin to check the state of Location/WiFi/Camera/Bluetooth device settings.",
         "data": {},
         "dependedBy": []
+      },
+      {
+        "id": "cordova-plugin-actionsheet",
+        "name": "ActionSheet",
+        "version": "2.3.3",
+        "originType": "cordova.io",
+        "origin": "cordova-plugin-actionsheet",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova-plugin-actionsheet",
+        "selectedState": "Included",
+        "checksum": "38ea1f07",
+        "dependsOn": [],
+        "topLevel": false,
+        "cordovaVersion": ">=3.0.0",
+        "author": "Eddy Verbruggen",
+        "permissions": {},
+        "description": "Show a sheet of options the user can choose from.",
+        "data": {},
+        "dependedBy": [
+          "uk.co.workingedge.phonegap.plugin.launchnavigator"
+        ],
+        "custom": "true"
+      },
+      {
+        "id": "uk.co.workingedge.phonegap.plugin.launchnavigator",
+        "name": "Launch Navigator",
+        "version": "3.2.1",
+        "originType": "cordova.io",
+        "origin": "uk.co.workingedge.phonegap.plugin.launchnavigator",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/uk.co.workingedge.phonegap.plugin.launchnavigator",
+        "selectedState": "Included",
+        "checksum": "de22131e",
+        "dependsOn": [
+          "cordova-plugin-actionsheet"
+        ],
+        "topLevel": true,
+        "cordovaVersion": ">=4.0.0",
+        "author": "Dave Alden",
+        "permissions": {},
+        "description": "Cordova/Phonegap plugin to navigate to a destination using native navigation apps on Android, iOS, and Windows Phone",
+        "data": {},
+        "dependedBy": [],
+        "custom": "true"
       }
     ],
     "buildConfigurations": {

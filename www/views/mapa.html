@@ -7,8 +7,9 @@
     </div>
     <div class="row">
         <div class="col-xs-12 text-center">
-            <a class="btn btn-info" href="http://maps.google.com/maps?q=loc:{{sitio.latitud}},{{sitio.longitud}}&navigate=yes">
-                <i class="fa fa-location-arrow" aria-hidden="true"></i>Ir a este sitio</a>
+            <button class="btn btn-info btn-block btnIr" onclick="navegar();">
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>Ir a este sitio
+            </button>
         </div>
     </div>
     <div class="row">
@@ -18,8 +19,9 @@
     </div> 
     <div class="row">
         <div class="col-xs-12 text-center">
-            <a class="btn btn-info" href="http://maps.google.com/maps?q=loc:{{sitio.latitud}},{{sitio.longitud}}&navigate=yes">
-                <i class="fa fa-location-arrow" aria-hidden="true"></i>Ir a este sitio</a>
+            <button class="btn btn-info btn-block btnIr" onclick="navegar();">
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>Ir a este sitio
+            </button>
         </div>
     </div>
 </div>
@@ -32,6 +34,8 @@
 	var directionsService  = null;
 	//14.796662, -89.547020
 	
+    $(".btnIr").hide();
+    
 	function initMap() {
         console.log("Iniciando mapa..");
         
@@ -128,12 +132,31 @@
 			}
         });
         
+        setTimeout(function(){
+            $(".btnIr").show();
+        }, 6000);
         /*
         var sitios = getPosicionesCercanas(pos, 5);
 		console.log(sitios);
 		showCercanos(sitios, map);
         */
 	}
+    
+    function navegar() {
+      //miPosicion
+        if(miPosicion) {
+            if(launchnavigator){
+                console.log("Si");
+                launchnavigator.navigate([posicionSitio.lat, posicionSitio.lng], {
+                    start: [miPosicion.lat , miPosicion.lng]
+                });
+            }else{
+                console.log("Error: no se creo el launchnavigator ");
+            }
+        }else {
+            console.log("Error: no se creo el miPosicion ");
+        }
+    };
 
 </script>
 

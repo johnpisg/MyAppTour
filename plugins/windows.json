@@ -21,6 +21,9 @@
         },
         "cordova.plugins.diagnostic.api-22": {
             "PACKAGE_NAME": "HelloCordova"
+        },
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+            "PACKAGE_NAME": "HelloCordova"
         }
     },
     "dependent_plugins": {
