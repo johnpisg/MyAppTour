@@ -26,10 +26,14 @@ var clientws = angular
           controller:'videosController',
           templateUrl:'views/videos.html'
         })
-         .when('/mapa/:id', {
+        .when('/mapa/:id', {
           controller:'mapaController',
           templateUrl:'views/mapa.html'
         })
+        .when('/comentarios/:id', {
+          controller:'comentariosController',
+          templateUrl:'views/listacom.html'
+        })        
         .otherwise({
           redirectTo:'/'
         });

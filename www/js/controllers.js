@@ -186,13 +186,19 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
         };
         
         $scope.openComment = function() {
+            var sitioId = $scope.sitio.id;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: 'myModalComment.html',
                 controller: 'CommentController',
-                size: 'lg'
+                size: 'lg',
+                resolve: {
+                   sitioObj: function () {
+                       return {'id':sitioId };
+                   }
+               }
             });
         };
     
@@ -318,8 +324,8 @@ clientws.controller('sliderController', ["$scope", "uniqueDevice", "restful", "$
        
     }]);
 
-clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInstance", "uniqueDevice", "restful",
-  function($scope, $interval, $uibModalInstance, uniqueDevice, restful) {
+clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInstance", "uniqueDevice", "restful", "sitioObj",
+  function($scope, $interval, $uibModalInstance, uniqueDevice, restful, sitioObj) {
         $scope.modelo = {
             desc: "",
             rank: 0
@@ -342,10 +348,12 @@ clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInsta
         $scope.guardar = function() {
             $scope.uuid = uniqueDevice.get();
             if($scope.modelo.desc){
+                var sitioId = sitioObj.id;
+                console.log(sitioId);
                 var dataToSend = {};
                 dataToSend.Usuario = "Usuario anónimo";
                 dataToSend.Texto = $scope.modelo.desc;
-                dataToSend.sitioId = 1;
+                dataToSend.sitioId = sitioId;
                 dataToSend.deviceUniqueId = $scope.uuid;
                 dataToSend.fecha = new Date();
                 
@@ -418,5 +426,24 @@ clientws.controller('mapaController', ["$scope", "restful", "$uibModal", "$log",
         };
     
         $scope.loadSitio();
+    
+}]);
+
+clientws.controller('comentariosController', ["$scope", "restful", "$uibModal", "$log", "$document", "$routeParams", "uniqueDevice", function($scope, restful, $uibModal, $log, $document, $routeParams, uniqueDevice){
+    $scope.titulo = "";
+    $scope.comentarios = [];
+    $scope.loadComentarios = function() {
+        $scope.uuid = uniqueDevice.get();      
+        restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
+            $scope.titulo = data.titulo;
+            restful.get("api/comentario/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
+                $scope.comentarios = data;
+                $("#load-div").hide();
+            }); 
+        }); 
+       
+    };
+    
+    $scope.loadComentarios();
     
 }]);

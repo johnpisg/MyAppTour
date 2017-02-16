@@ -105,3 +105,6 @@ body {
     margin: auto;
 }
 
+.text-orange i {
+    color:orange;
+}

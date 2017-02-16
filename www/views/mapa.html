@@ -1,15 +1,27 @@
 <div class="container">
-     <div class="row">
+    <div class="row">
         <h3>Ubicación del sitio</h4>
         <h4>{{sitio.nombre}}</h4>
          <input type="hidden" value="{{sitio.longitud}}" id="lon" />
          <input type="hidden" value="{{sitio.latitud}}" id="lat" />
-     </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <a class="btn btn-info" href="google.navigation:q={{sitio.latitud}},{{sitio.longitud}}">
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>Ir a este sitio</a>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div id="map" style="height:400px;width:98%;background-color;red;"></div>
         </div>
-    </div>    
+    </div> 
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <a class="btn btn-info" href="google.navigation:q={{sitio.latitud}},{{sitio.longitud}}">
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>Ir a este sitio</a>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">

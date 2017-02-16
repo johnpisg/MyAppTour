@@ -22,16 +22,16 @@
                             <div class="caption-home-galeria">
                                 <h2>{{sitio.titulo}}</h2>
                                 {{sitio.ranking | number:1}}
-                                <h5 class="text-verde">
-                                    <i class="fa fa-star{{sitio.ranking > 0?'':'-o'}}" aria-hidden="true"></i>
-                                    <i class="fa fa-star{{sitio.ranking > 1?'':'-o'}}" aria-hidden="true"></i>
-                                    <i class="fa fa-star{{sitio.ranking > 2?'':'-o'}}" aria-hidden="true"></i>
-                                    <i class="fa fa-star{{sitio.ranking > 3?'':'-o'}}" aria-hidden="true"></i>
-                                    <i class="fa fa-star{{sitio.ranking > 4?'':'-o'}}" aria-hidden="true"></i>
+                                <h5 class="text-orange">
+                                    <i class="fa fa-star{{sitio.ranking > 0?(sitio.ranking < 1?'-half-o':''):'-o'}}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{{sitio.ranking > 1?(sitio.ranking < 2?'-half-o':''):'-o'}}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{{sitio.ranking > 2?(sitio.ranking < 3?'-half-o':''):'-o'}}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{{sitio.ranking > 3?(sitio.ranking < 4?'-half-o':''):'-o'}}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{{sitio.ranking > 4?(sitio.ranking < 5?'-half-o':''):'-o'}}" aria-hidden="true"></i>
                                 </h5>
                                 <p>
                                     {{sitio.descripcion | limitTo:70 }}..
-                                    <a href="#/detalle_sitio/{{sitio.id}}" class="link-more">
+                                    <a href="#/detalle_sitio/{{sitio.id}}" class="btn btn-info btn-block">
                                         <span class="link-text">Ver Sitio</span>
                                         <span class="text-blue"><i class="fa fa-chevron-right"></i></span>
                                     </a>
