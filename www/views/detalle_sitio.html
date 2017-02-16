@@ -32,20 +32,28 @@
                 <a class="btn btn-primary" href="#/videos/{{sitio.id}}">Ver videos</a>
             </div>
         </div>
-          <section class="">
+        <section class="">
             <div class="container">                        
+                <h3 class="text-marron-dark">Información báscica</h3>
+                <p class="lead">{{sitio.descripcion}}</p>
+                
+                <h3 class="text-marron-dark">Información turística</h3>
                 <p class="lead">{{sitio.info}}</p>
                 
-                <h3 class="text-marron-dark">Datos Generales</h3>
-                <h4 class="subtitle s-primary">{{sitio.datos}}
-                </h4>                
-                <p>{{sitio.masdatos}}</p>                        
+                <h3 class="text-marron-dark">Ubicación</h3>
+                <p class="lead">{{sitio.datos}}</p>
+                <p></p>
+                <p class="lead">{{sitio.masdatos}}</p>                        
                 
                 <h3 class="text-marron-dark">Horarios de atención</h3>
-                <h4 class="subtitle s-primary">{{sitio.horario}}</h4>
+                <ul class="lead">
+                    <li ng-repeat="hora in horarios">
+                        {{hora}}
+                    </li>
+                </ul>
                 
                 <h3 class="text-marron-dark">Precio de Entrada</h3>
-                <h4 class="subtitle s-primary">{{sitio.precio}}</h4>
+                <h4 class="lead">Q. {{sitio.precio}}</h4>
                 
                 <p class="text-center visible-xs mt-30">
                     <br>
@@ -53,6 +61,30 @@
                     &nbsp;
                     <a class="btn btn-success dg" href="javascript:void()" ng-click="$event.preventDefault(); openComment();" titulo="Comentar" class="link-more text-blue">Comentar..<span><i class="fa fa-comments"></i></span></a>
                 </p>
+            </div>
+        </section>
+        <section class="">
+            <div class="container">                        
+                <h3 class="text-marron-dark">Comentarios</h3>
+                <div class="comment" ng-repeat="com in comentarios">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{com.Texto}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6"></div>
+                        <div class="col-xs-6">
+                            Por: {{com.Usuario}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6"></div>
+                        <div class="col-xs-6">
+                            {{formattedDate(com.fecha)}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
       </div>                

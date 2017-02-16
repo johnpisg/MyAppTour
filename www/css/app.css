@@ -75,3 +75,33 @@ body {
 #load-div .container {
     color: red;
 }
+
+.lead {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.comment {
+    padding: 15px;
+    border-bottom-style: dotted;
+    border-bottom-color: gray;
+    border-bottom-width: 2px;
+}
+
+.mt-30 img {
+    display: block;
+    max-height:200px;
+    width: auto;
+    height: auto;
+    margin: auto;
+}
+
+.fotoslider {
+    display: block;
+    max-height:100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    margin: auto;
+}
+

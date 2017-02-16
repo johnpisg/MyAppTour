@@ -22,7 +22,7 @@ clientws.controller('mainController', ["$scope", "restful", "uniqueDevice",
                 imgUrl = imgUrl.replace("~/", "");
                 return $scope.siteImages + imgUrl;
             }
-            return "";
+            return "img/imgDefault.jpg";
         };
         
         $scope.loadSitios = function() {
@@ -70,7 +70,7 @@ clientws.controller('top5Controller', ["$scope", "uniqueDevice", "restful",
                 imgUrl = imgUrl.replace("~/", "");
                 return $scope.siteImages + imgUrl;
             }
-            return "";
+            return "img/imgDefault.jpg";
         };
        
         $scope.loadSitios = function() {
@@ -112,6 +112,36 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
             userRating: 0,
             rankear: false 
         };
+        $scope.horarios = [];
+        $scope.getHorarios = function(strHorarios){
+            //Lunes(06:00-20:00)|Martes(06:00-20:00)|Miércoles(06:00-20:00)|Jueves(06:00-20:00)|Viernes(06:00-20:00)|Sábado(06:00-20:00)|Domingo(06:00-20:00)|
+            console.log(strHorarios);
+            if(strHorarios){
+                var arra = strHorarios.split("|");
+                arra = arra.filter(function(e){return e}); 
+                return arra;
+            }
+            return [];
+        };
+        
+        $scope.formattedDate = function(date) {
+            var d = new Date(date || Date.now()),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [day, month, year].join('/');
+        }
+    
+        $scope.comentarios = [
+            {Texto:"primer comentario", Usuario:"user1", fecha:new Date()},
+            {Texto:"primer comentario", Usuario:"user1", fecha:new Date()},
+            {Texto:"primer comentario", Usuario:"user1", fecha:new Date()},
+            {Texto:"primer comentario", Usuario:"user1", fecha:new Date()}
+        ];
     
         $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
         $scope.getImagenUrl = function(sitio){
@@ -120,15 +150,22 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
                 imgUrl = imgUrl.replace("~/", "");
                 return $scope.siteImages + imgUrl;
             }
-            return "";
+            return "img/imgDefault.jpg";
         };
     
         $scope.loadSitio = function() {
             $scope.uuid = uniqueDevice.get();
             restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
                 $scope.sitio = data;  
+                $scope.sitio.userRating = Math.round($scope.sitio.ranking*10)/10;
+                console.log("$scope.sitio.horario=" + $scope.sitio.horario);
+                $scope.horarios = $scope.getHorarios($scope.sitio.horario);
+                console.log("rankear=" + $scope.sitio.rankear);
                 $("#load-div").hide();
-            });            
+            }); 
+            restful.get("api/comentario/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
+                $scope.comentarios = data;
+            }); 
         };
     
         $scope.ratedCallback = function() {
@@ -142,7 +179,7 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
                 Rank: $scope.sitio.userRating,
                 DeviceId: $scope.uuid
             };
-            restful.rank("api/sitio/", dataToSend, function(data){
+            restful.post("api/sitio/", dataToSend, function(data){
                console.log(data); 
                $scope.sitio.desactivarRating = true;
             });            
@@ -281,8 +318,8 @@ clientws.controller('sliderController', ["$scope", "uniqueDevice", "restful", "$
        
     }]);
 
-clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInstance", "uniqueDevice",
-  function($scope, $interval, $uibModalInstance, uniqueDevice) {
+clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInstance", "uniqueDevice", "restful",
+  function($scope, $interval, $uibModalInstance, uniqueDevice, restful) {
         $scope.modelo = {
             desc: "",
             rank: 0
@@ -303,7 +340,20 @@ clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInsta
         //$scope.animar();
     
         $scope.guardar = function() {
-            $uibModalInstance.close();
+            $scope.uuid = uniqueDevice.get();
+            if($scope.modelo.desc){
+                var dataToSend = {};
+                dataToSend.Usuario = "Usuario anónimo";
+                dataToSend.Texto = $scope.modelo.desc;
+                dataToSend.sitioId = 1;
+                dataToSend.deviceUniqueId = $scope.uuid;
+                dataToSend.fecha = new Date();
+                
+                restful.post("api/comentario", dataToSend, function(data){
+                    console.log(data);                     
+                    $uibModalInstance.close();    
+                });
+            }
         };
         
         $scope.cancelar = function() {

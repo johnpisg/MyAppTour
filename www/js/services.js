@@ -12,7 +12,7 @@ clientws.factory('restful', function($http) {
                 console.error(err);
             });
       },
-      rank: function(url, dto, callback) {
+      post: function(url, dto, callback) {
        var baseurl = "http://city-tour-chiquimula-ws.somee.com/";
        $http
             .post(baseurl + url, dto)
