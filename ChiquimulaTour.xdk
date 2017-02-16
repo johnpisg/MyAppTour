@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "8347b552-4b14-40c4-9e8a-627227ed198b",
-      "lastModifiedDate": 1486613908206,
+      "lastModifiedDate": 1487263276646,
       "creationDate": 1475977401878
     },
     "XDK-app-designer": "false",
@@ -122,6 +122,26 @@
           "cordova-plugin-geolocation"
         ],
         "custom": "true"
+      },
+      {
+        "id": "cordova.plugins.diagnostic.api-22",
+        "name": "Diagnostic",
+        "version": "2.3.10-api-22",
+        "originType": "cordova.io",
+        "origin": "cordova.plugins.diagnostic.api-22",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova.plugins.diagnostic.api-22",
+        "selectedState": "Included",
+        "checksum": "b818ece9",
+        "dependsOn": [],
+        "topLevel": true,
+        "cordovaVersion": ">=3.0.0",
+        "author": "Dave Alden",
+        "permissions": {},
+        "description": "Cordova/Phonegap plugin to check the state of Location/WiFi/Camera/Bluetooth device settings.",
+        "data": {},
+        "dependedBy": []
       }
     ],
     "buildConfigurations": {

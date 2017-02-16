@@ -31,7 +31,10 @@
 
 function onLoad() {
     console.log("OnLoad..");
-    navigator.geolocation.getCurrentPosition(function(position) {
+    console.log("Watching position..");
+    var mostrandoPopup = false;
+    //navigator.geolocation.getCurrentPosition(function(position) {
+    var watchId = navigator.geolocation.watchPosition(function(position) {
         console.log("position");
         console.log(position);
     }, function(er) {
@@ -53,7 +56,30 @@ function onLoad() {
                 break;
         }
         
-    }, { maximumAge: 0, timeout: 10000, enableHighAccuracy: true });
+        //ver si está activo el GPS
+        try{
+            cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+                console.log("GPS is " + (enabled ? "enabled" : "disabled"));
+                if(enabled) {
+                    navigator.geolocation.clearWatch(watchId);
+                }else{
+                    //Activar GPS
+                    if(!mostrandoPopup){
+                        mostrandoPopup = true;
+                        var r = confirm("Necesitamos acceder a su ubicación y parece que tiene su GPS desactivado.\n¿Desea activarlo ahora?");
+                        if (r == true) {
+                            cordova.plugins.diagnostic.switchToLocationSettings();
+                        } else {
+
+                        }
+                    }
+                }
+            }, function(error){
+                console.error("The following error occurred: "+error);
+            }); 
+        }catch(_Err_){};
+        
+    }, { maximumAge: 0, timeout: 5000, enableHighAccuracy: true });
 }
 
 function onDeviceReady() {
