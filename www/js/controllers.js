@@ -445,7 +445,9 @@ clientws.controller('mapaController', ["$scope", "restful", "$uibModal", "$log",
     
         $scope.compartirMapa = function() {
             //https://www.google.com/maps/dir/Current+Location/14.799427,-89.546403
-            var urlMapa = "https://www.google.com/maps/dir/Current+Location/";
+            //var urlMapa = "https://www.google.com/maps/dir/Current+Location/";
+            //http://maps.google.com/?q=
+            var urlMapa = "http://maps.google.com/?q=";
             urlMapa = urlMapa + $scope.sitio.latitud + "," + $scope.sitio.longitud;
             console.log("compartir mapa..");
             var mensaje = "Visitemos " + $scope.sitio.titulo;
