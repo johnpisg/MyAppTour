@@ -163,9 +163,13 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
                 console.log("rankear=" + $scope.sitio.rankear);
                 $("#load-div").hide();
             }); 
+            $scope.getComentarios();
+        };
+    
+        $scope.getComentarios = function() {
             restful.get("api/comentario/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
                 $scope.comentarios = data;
-            }); 
+            });     
         };
     
         $scope.ratedCallback = function() {
@@ -200,10 +204,24 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
                    }
                }
             });
+            
+            modalInstance.result.then(function(){
+                //Call function to reload the list
+                console.log("Retorno!");
+                $scope.getComentarios();
+            });
+        };
+    
+        $scope.compartirSitio = function(){
+            console.log("compartir sitio..");
+            var mensaje = $scope.sitio.titulo;
+            var asunto = "Empieza ya tu City Tour Chiquimula!";
+            var imagen = $scope.getImagenUrl($scope.sitio);
+            var linkApp = "https://play.google.com/store/apps/details?id=uk.co.aifactory.chessfree&hl=es";
+            window.plugins.socialsharing.share(mensaje, asunto, imagen, linkApp);
         };
     
         $scope.loadSitio();
-    
 }]);
 
 clientws.controller('cercanoController', function($scope){
@@ -425,6 +443,18 @@ clientws.controller('mapaController', ["$scope", "restful", "$uibModal", "$log",
                 
         };
     
+        $scope.compartirMapa = function() {
+            //https://www.google.com/maps/dir/Current+Location/14.799427,-89.546403
+            var urlMapa = "https://www.google.com/maps/dir/Current+Location/";
+            urlMapa = urlMapa + $scope.sitio.latitud + "," + $scope.sitio.longitud;
+            console.log("compartir mapa..");
+            var mensaje = "Visitemos " + $scope.sitio.titulo;
+            var asunto = "Empieza ya tu City Tour Chiquimula!";
+            var imagen = urlMapa;
+            var linkApp = "https://play.google.com/store/apps/details?id=uk.co.aifactory.chessfree&hl=es";
+            window.plugins.socialsharing.share(mensaje, asunto, imagen, linkApp);
+        }
+    
         $scope.loadSitio();
     
 }]);
@@ -443,6 +473,18 @@ clientws.controller('comentariosController', ["$scope", "restful", "$uibModal", 
         }); 
        
     };
+    
+    $scope.formattedDate = function(date) {
+        var d = new Date(date || Date.now()),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day, month, year].join('/');
+    }
     
     $scope.loadComentarios();
     

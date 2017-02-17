@@ -37,6 +37,9 @@ function onLoad() {
     var watchId = navigator.geolocation.watchPosition(function(position) {
         console.log("position");
         console.log(position);
+        //Si se logro obtener la posición limpiar el timer
+        navigator.geolocation.clearWatch(watchId);
+        
     }, function(er) {
         console.log("error");
         console.log(er);

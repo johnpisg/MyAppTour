@@ -18,13 +18,13 @@
       "tinyhippos-geosettings": {
         "id": "tinyhippos-geosettings",
         "key": "geosettings",
-        "value": "{\"position\":{\"latitude\":14.652004,\"longitude\":-90.517763,\"altitude\":100,\"accuracy\":150,\"altitudeAccuracy\":80,\"heading\":0,\"speed\":0,\"timeStamp\":\"new Date(1487266163638)\"},\"delay\":\"0\",\"timeout\":false}",
+        "value": "{\"position\":{\"latitude\":14.652004,\"longitude\":-90.517763,\"altitude\":100,\"accuracy\":150,\"altitudeAccuracy\":80,\"heading\":0,\"speed\":0,\"timeStamp\":\"new Date(1487355025053)\"},\"delay\":\"0\",\"timeout\":false}",
         "prefix": "tinyhippos-"
       },
       "tinyhippos-saved-sims": {
         "id": "tinyhippos-saved-sims",
         "key": "saved-sims",
-        "value": "[{\"service\":\"UniqueDeviceID\",\"action\":\"get\",\"args\":[],\"value\":12345,\"success\":true},{\"service\":\"Diagnostic\",\"action\":\"isGpsLocationEnabled\",\"args\":[],\"value\":true,\"success\":true},{\"service\":\"LaunchNavigator\",\"action\":\"discoverSupportedApps\",\"args\":[],\"value\":true,\"success\":true},{\"service\":\"LaunchNavigator\",\"action\":\"availableApps\",\"args\":[],\"value\":true,\"success\":true}]",
+        "value": "[{\"service\":\"UniqueDeviceID\",\"action\":\"get\",\"args\":[],\"value\":12345,\"success\":true},{\"service\":\"Diagnostic\",\"action\":\"isGpsLocationEnabled\",\"args\":[],\"value\":true,\"success\":true},{\"service\":\"LaunchNavigator\",\"action\":\"discoverSupportedApps\",\"args\":[],\"value\":true,\"success\":true},{\"service\":\"LaunchNavigator\",\"action\":\"availableApps\",\"args\":[],\"value\":true,\"success\":true},{\"service\":\"SocialSharing\",\"action\":\"share\",\"args\":[\"Empieza ya tu City Tour Chiquimula!\",\"Empieza ya tu City Tour Chiquimula!\",[\"http://city-tour-chiquimula.somee.com/Images/1.jpg\"],\"https://play.google.com/store/apps/details?id=uk.co.aifactory.chessfree&hl=es\"],\"value\":1,\"success\":true}]",
         "prefix": "tinyhippos-"
       },
       "tinyhippos-geo-map-zoom-key": {

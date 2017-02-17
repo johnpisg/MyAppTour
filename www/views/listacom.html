@@ -1,24 +1,22 @@
 <h1>{{titulo}}</h1>
-
+<p>&nbsp;</p>
 <!-- comentarios -->
 <div class="container-fluid">
     <h3 class="text-marron-dark">Comentarios</h3>
-    <div class="comment" ng-repeat="com in comentarios">
-        <div class="row">
-            <div class="col-xs-12">
-                {{com.Texto}}
-            </div>
+    <div class="row" ng-repeat="com in comentarios">
+        <div class="col-xs-1 text-center">
+            <a>
+                <span class="fa fa-user fa-2x" aria-hidden="true"></span>
+            </a>                        
         </div>
-        <div class="row">
-            <div class="col-xs-6"></div>
-            <div class="col-xs-6">
-                Por: {{com.Usuario}}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6"></div>
-            <div class="col-xs-6">
-                {{formattedDate(com.fecha)}}
+        <div class="col-xs-11">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Por <strong>{{com.Usuario}}</strong> <span class="text-muted">, el {{formattedDate(com.fecha)}}</span>
+                </div>
+                <div class="panel-body">
+                    {{com.Texto}}
+                </div>
             </div>
         </div>
     </div>

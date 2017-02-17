@@ -25,6 +25,7 @@
 <intelxdk:plugin intelxdk:name="Diagnostic" intelxdk:value="cordova.plugins.diagnostic.api-22" intelxdk:version="2.3.10-api-22" intelxdk:checksum="b818ece9" intelxdk:type="file"/>
 <intelxdk:plugin intelxdk:name="ActionSheet" intelxdk:value="cordova-plugin-actionsheet" intelxdk:version="2.3.3" intelxdk:checksum="38ea1f07" intelxdk:type="file"/>
 <intelxdk:plugin intelxdk:name="Launch Navigator" intelxdk:value="uk.co.workingedge.phonegap.plugin.launchnavigator" intelxdk:version="3.2.1" intelxdk:checksum="de22131e" intelxdk:type="file"/>
+<intelxdk:plugin intelxdk:name="SocialSharing" intelxdk:value="cordova-plugin-x-socialsharing" intelxdk:version="5.1.3" intelxdk:checksum="3e747ade" intelxdk:type="file"/>
 <preference name="ios-configuration" value="adhoc"/>
 <preference name="deployment-target" value="8.0"/>
 <!--creationInfo:{"src":"jsapp/template-blank-cordova-project-lite/sample.zip","projectTypeName":"com.intel.xdk.projecttype.jsapp"}-->
