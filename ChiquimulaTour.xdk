@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "8347b552-4b14-40c4-9e8a-627227ed198b",
-      "lastModifiedDate": 1487349140038,
+      "lastModifiedDate": 1487531185645,
       "creationDate": 1475977401878
     },
     "XDK-app-designer": "false",
@@ -159,7 +159,7 @@
         "selectedState": "Included",
         "checksum": "38ea1f07",
         "dependsOn": [],
-        "topLevel": false,
+        "topLevel": true,
         "cordovaVersion": ">=3.0.0",
         "author": "Eddy Verbruggen",
         "permissions": {},

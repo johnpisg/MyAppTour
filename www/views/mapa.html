@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <h3>Ubicación del sitio</h4>
+        <h1>Ubicación del sitio</h1>
         <h4>{{sitio.nombre}}</h4>
          <input type="hidden" value="{{sitio.longitud}}" id="lon" />
          <input type="hidden" value="{{sitio.latitud}}" id="lat" />
@@ -57,7 +57,7 @@
 	var directionsService  = null;
 	//14.796662, -89.547020
 	
-    $(".btnIr").hide();
+    $(".btnIr").prop('disabled', true);//.hide();
     
 	function initMap() {
         console.log("Iniciando mapa..");
@@ -156,7 +156,7 @@
         });
         
         setTimeout(function(){
-            $(".btnIr").show();
+            $(".btnIr").prop('disabled', false);//.show();
         }, 5000);
         /*
         var sitios = getPosicionesCercanas(pos, 5);

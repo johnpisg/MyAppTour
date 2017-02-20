@@ -216,8 +216,9 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
             console.log("compartir sitio..");
             var mensaje = $scope.sitio.titulo;
             var asunto = "Empieza ya tu City Tour Chiquimula!";
-            var imagen = $scope.getImagenUrl($scope.sitio);
+            var imagen = encodeURI($scope.getImagenUrl($scope.sitio));
             var linkApp = "https://play.google.com/store/apps/details?id=uk.co.aifactory.chessfree&hl=es";
+            console.log(imagen);
             window.plugins.socialsharing.share(mensaje, asunto, imagen, linkApp);
         };
     
@@ -258,85 +259,78 @@ clientws.controller('cercanoController', function($scope){
         
     });
     
-clientws.controller('sliderController', ["$scope", "uniqueDevice", "restful", "$routeParams", 
-   function($scope, uniqueDevice, restful, $routeParams) {
-          $scope.myInterval = 5000;
-          $scope.noWrapSlides = false;
-          $scope.active = 0;
-          
-        var slides = $scope.slides = [];
-        var currIndex = 0;
+clientws.controller('sliderController', ["$scope", "uniqueDevice", "restful", "$routeParams", "$location", "$window", 
+   function($scope, uniqueDevice, restful, $routeParams, $location, $window) {
+        $scope.items = [];
             
         $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
         $scope.getImagenesUrl = function(sitio) {
+            $scope.items = [];
             for(var i=0; sitio.imagenes && i<sitio.imagenes.length; i++ ){
                 var imgUrl = sitio.imagenes[i]; 
                 imgUrl = imgUrl.replace("~/", "");
                 imgUrl = $scope.siteImages + imgUrl;
-                
-                $scope.addSlide(imgUrl, "Imagen " + (i+1));
+                imgUrl = encodeURI(imgUrl);
+                //$scope.addSlide(imgUrl, "Imagen " + (i+1));
+                $scope.items.push({
+                    src: imgUrl,
+                    w:2500,
+                    h:2500
+                });
             }
         };
     
         $scope.loadSitio = function() {
             $scope.uuid = uniqueDevice.get();
+            $("#LblNohay").hide();
             restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
                 $scope.sitio = data;  
                 console.log(data);
                 $scope.getImagenesUrl(data);
-                $("#load-div").hide();
+                if($scope.items.length > 0) {
+                    setTimeout(function(){
+                        $scope.iniciarGaleria($scope.items);    
+                        $("#load-div").hide();
+                    }, 1);    
+                }else{
+                    $("#LblNohay").show();
+                    $("#load-div").hide();
+                }  
             });            
         };
     
-          $scope.addSlide = function(url, title) {
-            slides.push({
-              image: url,
-              text: title,
-              id: currIndex++
+        $scope.iniciarGaleria = function(items) {
+            var pswpElement = document.querySelectorAll('.pswp')[0];
+            // build items array
+            
+            // define options (if needed)
+            var options = {
+                // optionName: 'option value'
+                // for example:
+                index: 0 // start at first slide
+            };
+
+            // Initializes and opens PhotoSwipe
+            var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+            gallery.init();
+            
+            // Gallery starts closing
+            //gallery.listen('close', function() { });
+            // Gallery unbinds events
+            // (triggers before closing animation)
+            //gallery.listen('unbindEvents', function() { });
+            // After gallery is closed and closing animation finished.
+            // Clean up your stuff here.
+            gallery.listen('destroy', function() { 
+                $("#load-div").show();
+                console.log("redireccionando..");
+                //console.log($location);
+                //$location.path("detalle_sitio/" + $routeParams.id);
+                setTimeout(function(){
+                    $window.location.href = "#/detalle_sitio/" + $routeParams.id;
+                }, 300); 
             });
-          };
-
-          $scope.randomize = function() {
-            var indexes = generateIndexesArray();
-            assignNewIndexesToSlides(indexes);
-          };
-
-          /*for (var i = 0; i < 4; i++) {
-            $scope.addSlide();
-          }
-            $("#load-div").hide();*/
-
-          // Randomize logic below
-
-          function assignNewIndexesToSlides(indexes) {
-            for (var i = 0, l = slides.length; i < l; i++) {
-              slides[i].id = indexes.pop();
-            }
-          }
-
-          function generateIndexesArray() {
-            var indexes = [];
-            for (var i = 0; i < currIndex; ++i) {
-              indexes[i] = i;
-            }
-            return shuffle(indexes);
-          }
-
-          // http://stackoverflow.com/questions/962802#962890
-          function shuffle(array) {
-            var tmp, current, top = array.length;
-
-            if (top) {
-              while (--top) {
-                current = Math.floor(Math.random() * (top + 1));
-                tmp = array[current];
-                array[current] = array[top];
-                array[top] = tmp;
-              }
-            }
-
-            return array;
-          }  
+        };
        
        $scope.loadSitio();
        
@@ -447,14 +441,39 @@ clientws.controller('mapaController', ["$scope", "restful", "$uibModal", "$log",
             //https://www.google.com/maps/dir/Current+Location/14.799427,-89.546403
             //var urlMapa = "https://www.google.com/maps/dir/Current+Location/";
             //http://maps.google.com/?q=
-            var urlMapa = "http://maps.google.com/?q=";
-            urlMapa = urlMapa + $scope.sitio.latitud + "," + $scope.sitio.longitud;
-            console.log("compartir mapa..");
-            var mensaje = "Visitemos " + $scope.sitio.titulo;
-            var asunto = "Empieza ya tu City Tour Chiquimula!";
-            var imagen = urlMapa;
+            //var urlMapa = "http://maps.google.com/?q=";
+            //var ulrMapa = "https://www.google.com/maps/preview/@";
+            //urlMapa = urlMapa + $scope.sitio.latitud + "," + $scope.sitio.longitud + ",8z";
+//            var urlMapa = "http://www.google.com/maps/place/";
+//            urlMapa = urlMapa + $scope.sitio.latitud + "," + $scope.sitio.longitud;
+//            console.log("compartir mapa..");
+//            var mensaje = "Visitemos " + $scope.sitio.titulo;
+//            var asunto = "Empieza ya tu City Tour Chiquimula!";
+//            var imagen = urlMapa;
+//            var linkApp = "https://play.google.com/store/apps/details?id=uk.co.aifactory.chessfree&hl=es";
+//            window.plugins.socialsharing.share(mensaje, asunto, imagen, linkApp);
+            
             var linkApp = "https://play.google.com/store/apps/details?id=uk.co.aifactory.chessfree&hl=es";
-            window.plugins.socialsharing.share(mensaje, asunto, imagen, linkApp);
+            var urlMapa = "http://www.google.com/maps/place/";
+            urlMapa = urlMapa + $scope.sitio.latitud + "," + $scope.sitio.longitud;
+            // this is the complete list of currently supported params you can pass to the plugin (all optional)
+            var options = {
+              message: "Visitemos " + $scope.sitio.titulo, // not supported on some apps (Facebook, Instagram)
+              subject: "Empieza ya tu City Tour Chiquimula!", // fi. for email
+              //files: ['', ''], // an array of filenames either locally or remotely
+              url: urlMapa
+            }
+
+            var onSuccess = function(result) {
+              console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+              console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+            }
+
+            var onError = function(msg) {
+              console.log("Sharing failed with message: " + msg);
+            }
+
+            window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
         }
     
         $scope.loadSitio();

@@ -42,6 +42,8 @@ var clientws = angular
     $rootScope.$on("$locationChangeStart", function(event, next, current) { 
         // handle route changes     
         console.log("Cambio de página");
+        console.log(next);
+        console.log(current);
         $("#load-div").show();
     });
 });
