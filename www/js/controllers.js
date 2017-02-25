@@ -83,20 +83,15 @@ clientws.controller('top5Controller', ["$scope", "uniqueDevice", "restful",
                 $scope.modelo.sitios = data; 
                 console.log(data);
                 $("#load-div").hide();
-            });
-            /*$scope.modelo.sitios = [];
-            for(var i=1; i<5; i++) {
-                var newSitio = $.extend(true, {}, sitio);    
-                newSitio.titulo = newSitio.titulo + "[" + i + "]";
-                $scope.modelo.sitios.push(newSitio);
-            }*/
+            });            
         }
         
         $scope.loadSitios();
     
     }]);
 
-clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$log", "$document", "$routeParams", "uniqueDevice", function($scope, restful, $uibModal, $log, $document, $routeParams, uniqueDevice){
+clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$log", "$document", "$routeParams", "uniqueDevice", 
+                                          function($scope, restful, $uibModal, $log, $document, $routeParams, uniqueDevice){
         $scope.sitio = {
             id: $routeParams.id,
             nombre: "Mi Sitio",
@@ -225,9 +220,11 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
         $scope.loadSitio();
 }]);
 
-clientws.controller('cercanoController', function($scope){
+clientws.controller('cercanoController', ["$scope", "restful", "$uibModal", "$timeout", "$document", "$routeParams", "uniqueDevice", 
+                                          function($scope, restful, $uibModal, $timeout, $document, $routeParams, uniqueDevice){
         $scope.modelo = {
           mensaje: "Más cercanos"
+            
         };
     
         var sitio = {
@@ -240,24 +237,47 @@ clientws.controller('cercanoController', function($scope){
     
         $scope.modelo.sitios = [];
         
-        $scope.loadSitios = function() {
-            $scope.modelo.sitios = [];
-            for(var i=1; i<5; i++) {
-                var newSitio = $.extend(true, {}, sitio);    
-                newSitio.titulo = newSitio.titulo + "[" + i + "]";
-                $scope.modelo.sitios.push(newSitio);
+        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
+        $scope.getImagenUrl = function(sitio){
+            if(sitio.imagenes && sitio.imagenes.length > 0) {
+                var imgUrl = sitio.imagenes[0];
+                imgUrl = imgUrl.replace("~/", "");
+                return $scope.siteImages + imgUrl;
             }
-            $("#load-div").hide();
+            return "img/imgDefault.jpg";
+        };
+       
+        $scope.loadSitios = function(lat, long, radio, fnCallback) {
+            if(!radio){
+                radio = 1000;
+            }
+            console.log("Más cercanos al punto actual");
+            var uuid = uniqueDevice.get();
+            console.log("device unique Id para enviar es = " + uuid);
+            $scope.modelo.sitios = [];
+            var dto = {};
+            dto.Latitud = lat;
+            dto.Longitud = long;
+            dto.RadioKm = radio;
+            dto.DeviceId = uuid;
+            
+            restful.post("api/Geo", dto, function(data){
+                $scope.modelo.sitios = data; 
+                console.log(data);
+                
+                if(fnCallback){
+                    fnCallback(data);
+                }
+                        
+                $timeout(function(){
+                    $scope.$apply();                    
+                }, 100);
+                
+                $("#load-div").hide();
+            });            
         }
         
-        $scope.getPosicion = function() {
-             
-        }
-        
-        $scope.loadSitios();
-        $scope.getPosicion();
-        
-    });
+}]);
     
 clientws.controller('sliderController', ["$scope", "uniqueDevice", "restful", "$routeParams", "$location", "$window", 
    function($scope, uniqueDevice, restful, $routeParams, $location, $window) {

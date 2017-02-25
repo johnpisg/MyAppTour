@@ -35,6 +35,9 @@
     "dependent_plugins": {
         "cordova-plugin-compat": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     }
 }
