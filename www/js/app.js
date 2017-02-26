@@ -88,6 +88,31 @@ function onLoad() {
 function onDeviceReady() {
     console.log("onDeviceReady Ready!!!");   
     onLoad();
+    
+    //back button
+    document.addEventListener("backbutton", function(e){
+        console.log($(".main-title").text());
+        if(
+            $(".main-title").text() == "Citytour Chiquimula" 
+            || $(".main-title").text() == "Top 5 sitios"
+            || $(".main-title").text() == "Sitios cercanos"
+          ){
+           e.preventDefault();
+           navigator.app.exitApp();
+        }
+        else if($(".main-title").text() == "Detalle del sitio") {
+            var urlAnterior = $("#HdnAnteriorDetalle").val();
+            //navigator.app.backHistory()
+            console.log("Retrocediendo a " + urlAnterior);
+            window.location.href = urlAnterior;
+        }
+        else {
+            var urlAnterior = $("#HdnAnterior").val();
+            //navigator.app.backHistory()
+            console.log("Retrocediendo a " + urlAnterior);
+            window.location.href = urlAnterior;
+        }
+    }, false);
 }
 
 //document.addEventListener("app.Ready", onAppReady, false) ;

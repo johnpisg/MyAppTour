@@ -26,6 +26,7 @@ clientws.controller('mainController', ["$scope", "restful", "uniqueDevice",
         };
         
         $scope.loadSitios = function() {
+            $(".main-title").text("Citytour Chiquimula");
             console.log("loadSitios");
             var uuid = uniqueDevice.get();
             console.log("device unique Id para enviar es = " + uuid);
@@ -49,6 +50,7 @@ clientws.controller('mainController', ["$scope", "restful", "uniqueDevice",
 
 clientws.controller('top5Controller', ["$scope", "uniqueDevice", "restful", 
    function($scope, uniqueDevice, restful) {
+       
         $scope.modelo = {
           mensaje: "Hola mundo!"
         };
@@ -74,6 +76,7 @@ clientws.controller('top5Controller', ["$scope", "uniqueDevice", "restful",
         };
        
         $scope.loadSitios = function() {
+            $(".main-title").text("Top 5 sitios");
             console.log("TOP 5 loadSitios");
             var top = 5;
             var uuid = uniqueDevice.get();
@@ -149,6 +152,7 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
         };
     
         $scope.loadSitio = function() {
+            $(".main-title").text("Detalle del sitio");
             $scope.uuid = uniqueDevice.get();
             restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
                 $scope.sitio = data;  
@@ -246,6 +250,8 @@ clientws.controller('cercanoController', ["$scope", "restful", "$uibModal", "$ti
             }
             return "img/imgDefault.jpg";
         };
+
+        $(".main-title").text("Sitios cercanos");
        
         $scope.loadSitios = function(lat, long, radio, fnCallback) {
             if(!radio){
@@ -301,6 +307,7 @@ clientws.controller('sliderController', ["$scope", "uniqueDevice", "restful", "$
         };
     
         $scope.loadSitio = function() {
+            $(".main-title").text("Imágenes");
             $scope.uuid = uniqueDevice.get();
             $("#LblNohay").hide();
             restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
@@ -403,7 +410,7 @@ clientws.controller('CommentController', ["$scope", "$interval", "$uibModalInsta
 
 clientws.controller('videosController', ["$scope", "$sce", "$routeParams", "restful",
  function($scope, $sce, $routeParams, restful){
-     $scope.titulo = "Videos del sitio"    
+     $scope.titulo = ""    
      $("#load-div").hide();
      
      $scope.videosUrl = [];
@@ -413,8 +420,10 @@ clientws.controller('videosController', ["$scope", "$sce", "$routeParams", "rest
     };
      
      $scope.loadVideosSitio = function() {
+        $(".main-title").text("Videos");
         restful.get("api/video/" + $routeParams.id, function(data){
-            $scope.videosUrl = data;  
+            $scope.titulo = data.SitioTitulo;
+            $scope.videosUrl = data.Videos;  
             $("#load-div").hide();
         });            
     };
@@ -446,6 +455,7 @@ clientws.controller('mapaController', ["$scope", "restful", "$uibModal", "$log",
     
         
         $scope.loadSitio = function() {
+            $(".main-title").text("Ubicación");
             $scope.uuid = uniqueDevice.get();
             restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
                 $scope.sitio = data;  
@@ -503,7 +513,9 @@ clientws.controller('mapaController', ["$scope", "restful", "$uibModal", "$log",
 clientws.controller('comentariosController', ["$scope", "restful", "$uibModal", "$log", "$document", "$routeParams", "uniqueDevice", function($scope, restful, $uibModal, $log, $document, $routeParams, uniqueDevice){
     $scope.titulo = "";
     $scope.comentarios = [];
+    
     $scope.loadComentarios = function() {
+        $(".main-title").text("Comentarios");
         $scope.uuid = uniqueDevice.get();      
         restful.get("api/sitio/" + $routeParams.id + "?deviceUniqueId=" + $scope.uuid, function(data){
             $scope.titulo = data.titulo;

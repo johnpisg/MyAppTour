@@ -44,6 +44,19 @@ var clientws = angular
         console.log("Cambio de página");
         console.log(next);
         console.log(current);
+        
+        $("#HdnAnterior").val(current);
+        if(next.indexOf("detalle_sitio") !== -1
+            && 
+            (current.indexOf("photo") == -1 
+             && current.indexOf("video") == -1
+             && current.indexOf("comenta") == -1
+             && current.indexOf("mapa") == -1
+            )
+          ) {
+            $("#HdnAnteriorDetalle").val(current);
+        }
+        
         $("#load-div").show();
     });
 });

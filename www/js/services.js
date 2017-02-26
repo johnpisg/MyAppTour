@@ -55,3 +55,21 @@ clientws.service('uniqueDevice', function() {
     };
 });
 
+clientws.service('navigation', function() {
+    return {
+      name: 'navigation',    
+      paginas: {
+          "home" : "",
+          "detalle_sitio" : "home",
+          "fotos" : "detalle_sitio",
+          "videos" : "detalle_sitio",
+          "comentarios" : "detalle_sitio",
+          "top5" : "",
+      }
+    };
+});
+
+
+
+
+
