@@ -185,6 +185,7 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
             restful.post("api/sitio/", dataToSend, function(data){
                console.log(data); 
                $scope.sitio.desactivarRating = true;
+                $scope.sitio.rankear = false;
             });            
         };
         
@@ -268,20 +269,74 @@ clientws.controller('cercanoController', ["$scope", "restful", "$uibModal", "$ti
             dto.DeviceId = uuid;
             
             restful.post("api/Geo", dto, function(data){
-                $scope.modelo.sitios = data; 
+                $scope.modelo.sitios = data;
+                $scope.calcularDistanciaSitios($scope.modelo.sitios, lat, long); 
                 console.log(data);
                 
                 if(fnCallback){
                     fnCallback(data);
                 }
-                        
+                
+                //ordernarlos
+                
+                
                 $timeout(function(){
                     $scope.$apply();                    
                 }, 100);
                 
+                
+                
                 $("#load-div").hide();
-            });            
-        }
+            });
+            
+        };
+                                              
+        $scope.calcularDistanciaSitios = function(sitiosArray, lat, long){
+            /*{
+               "destination_addresses" : [ "Busto a Poeta Humberto Portamencos, Chiquimula, Guatemala" ],
+               "origin_addresses" : [ "2A Avenida, Guatemala 01002, Guatemala" ],
+               "rows" : [
+                  {
+                     "elements" : [
+                        {
+                           "distance" : {
+                              "text" : "171 km",
+                              "value" : 171405
+                           },
+                           "duration" : {
+                              "text" : "3 hours 22 mins",
+                              "value" : 12106
+                           },
+                           "status" : "OK"
+                        }
+                     ]
+                  }
+               ],
+               "status" : "OK"
+            }*/
+            
+            for(var i=0; i<sitiosArray.length; i++){
+                console.log(i);
+                console.log("sitiosArray[i]=" + sitiosArray[i]);
+                console.log(sitiosArray[i].latitud);
+                var sitioLat = sitiosArray[i].latitud;
+                var sitioLong = sitiosArray[i].longitud;
+                var url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + lat + "," + long 
+                    + "&destinations=" + sitioLat + "," + sitioLong 
+                    + "&key=AIzaSyBzm-77THcPeJTZtBOJir9XCBfBncMGqew";
+                restful.getMapsApi(url, i, function(response, indice){
+                    if(response.status == "OK") {
+                        console.log("AQUIII");
+                        console.log($scope.modelo.sitios);
+                        console.log($scope.modelo.sitios.length);
+                        console.log(indice);
+                        $scope.modelo.sitios[indice].DistanciaKm = response.rows[0].elements[0].distance.value;
+                        $scope.modelo.sitios[indice].DistanciaKmTexto = response.rows[0].elements[0].distance.text;
+                        $scope.modelo.sitios[indice].TiempoAprox = response.rows[0].elements[0].duration.text;
+                    }                    
+                });                
+            }
+        };
         
 }]);
     
@@ -341,13 +396,6 @@ clientws.controller('sliderController', ["$scope", "uniqueDevice", "restful", "$
             var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
             gallery.init();
             
-            // Gallery starts closing
-            //gallery.listen('close', function() { });
-            // Gallery unbinds events
-            // (triggers before closing animation)
-            //gallery.listen('unbindEvents', function() { });
-            // After gallery is closed and closing animation finished.
-            // Clean up your stuff here.
             gallery.listen('destroy', function() { 
                 $("#load-div").show();
                 console.log("redireccionando..");
@@ -468,21 +516,7 @@ clientws.controller('mapaController', ["$scope", "restful", "$uibModal", "$log",
         };
     
         $scope.compartirMapa = function() {
-            //https://www.google.com/maps/dir/Current+Location/14.799427,-89.546403
-            //var urlMapa = "https://www.google.com/maps/dir/Current+Location/";
-            //http://maps.google.com/?q=
-            //var urlMapa = "http://maps.google.com/?q=";
-            //var ulrMapa = "https://www.google.com/maps/preview/@";
-            //urlMapa = urlMapa + $scope.sitio.latitud + "," + $scope.sitio.longitud + ",8z";
-//            var urlMapa = "http://www.google.com/maps/place/";
-//            urlMapa = urlMapa + $scope.sitio.latitud + "," + $scope.sitio.longitud;
-//            console.log("compartir mapa..");
-//            var mensaje = "Visitemos " + $scope.sitio.titulo;
-//            var asunto = "Empieza ya tu City Tour Chiquimula!";
-//            var imagen = urlMapa;
-//            var linkApp = "https://play.google.com/store/apps/details?id=uk.co.aifactory.chessfree&hl=es";
-//            window.plugins.socialsharing.share(mensaje, asunto, imagen, linkApp);
-            
+                        
             var linkApp = "https://play.google.com/store/apps/details?id=uk.co.aifactory.chessfree&hl=es";
             var urlMapa = "http://www.google.com/maps/place/";
             urlMapa = urlMapa + $scope.sitio.latitud + "," + $scope.sitio.longitud;

@@ -10,7 +10,7 @@
     <input type="text" ng-model="modelo.mensaje" class="hide" id="TxtModelo" />
     <br/>
     <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="sitio in modelo.sitios">
+        <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="sitio in modelo.sitios | orderBy:'DistanciaKm'">
             <div class="item-slide-galerias text-center-min" style="border-bottom:1px dotted grey;">
                 <div class="row">
                     <div class="col-sm-12 col-xs-5">
@@ -23,7 +23,8 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 text-rigth">
-                                <h3>{{sitio.DistanciaKm | number:1 }} KM</h3>
+                                <h3>{{sitio.DistanciaKmTexto}}</h3>
+                                <h5>{{sitio.TiempoAprox}}</h5>
                             </div>                            
                         </div>
                     </div>

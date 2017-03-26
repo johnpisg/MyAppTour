@@ -12,6 +12,16 @@ clientws.factory('restful', function($http) {
                 console.error(err);
             });
       },
+      getMapsApi: function(url, indice, callback){
+        $http
+            .get(url)
+            .success(function(data) {
+                callback(data, indice);
+            })
+            .error(function(err){
+                console.error(err);
+            });
+      },
       post: function(url, dto, callback) {
        var baseurl = "http://city-tour-chiquimula-ws.somee.com/";
        $http
