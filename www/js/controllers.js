@@ -15,7 +15,7 @@ clientws.controller('mainController', ["$scope", "restful", "uniqueDevice",
     
         $scope.modelo.sitios = [];
     
-        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
+        $scope.siteImages = webSiteBaseUrl; //"http://city-tour-chiquimula.somee.com/";
         $scope.getImagenUrl = function(sitio){
             if(sitio.imagenes && sitio.imagenes.length > 0) {
                 var imgUrl = sitio.imagenes[0];
@@ -65,7 +65,7 @@ clientws.controller('top5Controller', ["$scope", "uniqueDevice", "restful",
     
         $scope.modelo.sitios = [];
         
-        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
+        $scope.siteImages = webSiteBaseUrl; //"http://city-tour-chiquimula.somee.com/";
         $scope.getImagenUrl = function(sitio){
             if(sitio.imagenes && sitio.imagenes.length > 0) {
                 var imgUrl = sitio.imagenes[0];
@@ -141,7 +141,7 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
             {Texto:"primer comentario", Usuario:"user1", fecha:new Date()}
         ];
     
-        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
+        $scope.siteImages = webSiteBaseUrl; //"http://city-tour-chiquimula.somee.com/";
         $scope.getImagenUrl = function(sitio){
             if(sitio.imagenes && sitio.imagenes.length > 0) {
                 var imgUrl = sitio.imagenes[0];
@@ -242,7 +242,7 @@ clientws.controller('cercanoController', ["$scope", "restful", "$uibModal", "$ti
     
         $scope.modelo.sitios = [];
         
-        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
+        $scope.siteImages = webSiteBaseUrl; //"http://city-tour-chiquimula.somee.com/";
         $scope.getImagenUrl = function(sitio){
             if(sitio.imagenes && sitio.imagenes.length > 0) {
                 var imgUrl = sitio.imagenes[0];
@@ -323,7 +323,7 @@ clientws.controller('cercanoController', ["$scope", "restful", "$uibModal", "$ti
                 var sitioLong = sitiosArray[i].longitud;
                 var url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + lat + "," + long 
                     + "&destinations=" + sitioLat + "," + sitioLong 
-                    + "&key=AIzaSyBzm-77THcPeJTZtBOJir9XCBfBncMGqew";
+                    + "&key=" + googleMapsApiKey;
                 restful.getMapsApi(url, i, function(response, indice){
                     if(response.status == "OK") {
                         console.log("AQUIII");
@@ -344,7 +344,7 @@ clientws.controller('sliderController', ["$scope", "uniqueDevice", "restful", "$
    function($scope, uniqueDevice, restful, $routeParams, $location, $window) {
         $scope.items = [];
             
-        $scope.siteImages = "http://city-tour-chiquimula.somee.com/";
+        $scope.siteImages = webSiteBaseUrl; //"http://city-tour-chiquimula.somee.com/";
         $scope.getImagenesUrl = function(sitio) {
             $scope.items = [];
             for(var i=0; sitio.imagenes && i<sitio.imagenes.length; i++ ){

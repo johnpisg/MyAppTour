@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "8347b552-4b14-40c4-9e8a-627227ed198b",
-      "lastModifiedDate": 1488075008305,
+      "lastModifiedDate": 1491169557779,
       "creationDate": 1475977401878
     },
     "XDK-app-designer": "false",
@@ -232,7 +232,7 @@
         "isActive_": true,
         "certificateId_": "vRUvKgQ70Umh8LZex_pYqg2",
         "appName_": "Citytour Chiquimula",
-        "appID_": "xdk.intel.cordova.template.lite",
+        "appID_": "lindsay.citytour.chiquimula",
         "appAccess_": {
           "mode": "whitelist",
           "network": [
@@ -254,25 +254,25 @@
         "icons_": [
           {
             "density": "ldpi",
-            "relPath": "package-assets/ICONO_36_36.png",
+            "relPath": "package-assets/ICONO_2_36_36.png",
             "width": 36,
             "height": 36
           },
           {
             "density": "mdpi",
-            "relPath": "package-assets/icono_48_48.png",
+            "relPath": "package-assets/ICONO_2_48_48.png",
             "width": 48,
             "height": 48
           },
           {
             "density": "hdpi",
-            "relPath": "package-assets/icono_72_72.png",
+            "relPath": "package-assets/ICONO_2_72_72.png",
             "width": 72,
             "height": 72
           },
           {
             "density": "xhdpi",
-            "relPath": "package-assets/icono_96_96.png",
+            "relPath": "package-assets/ICONO_2_96_96.png",
             "width": 96,
             "height": 96
           }
@@ -311,9 +311,9 @@
         "excludedLibraries_": "",
         "cordovaCLIVersion_": "6.2.0",
         "crosswalkVersion_": "19",
-        "appVersion_": "0.0.2",
+        "appVersion_": "1.0.0",
         "appDescription_": "Citytour Chiquimula",
-        "appAuthor_": "Intel XDK",
+        "appAuthor_": "Lindsay Villela",
         "appVersionCode_": "1",
         "signed_": true
       },

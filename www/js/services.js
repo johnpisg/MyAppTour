@@ -2,7 +2,7 @@ clientws.factory('restful', function($http) {
     return{
       name: 'Sitios Service',
       get: function(url, callback){
-        var baseurl = "http://city-tour-chiquimula-ws.somee.com/";
+        var baseurl = webServiceBaseUrl;
         $http
             .get(baseurl + url)
             .success(function(data) {
@@ -23,7 +23,7 @@ clientws.factory('restful', function($http) {
             });
       },
       post: function(url, dto, callback) {
-       var baseurl = "http://city-tour-chiquimula-ws.somee.com/";
+       var baseurl = webServiceBaseUrl;
        $http
             .post(baseurl + url, dto)
             .success(function(data) {
