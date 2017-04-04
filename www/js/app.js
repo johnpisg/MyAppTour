@@ -28,11 +28,11 @@
 // This example is calling the standard Cordova "hide splashscreen" function.
 // You can add other code to it or add additional functions that are triggered
 // by the same event or other events.
+var mostrandoPopup = false;
 
 function onLoad() {
     console.log("OnLoad..");
-    console.log("Watching position..");
-    var mostrandoPopup = false;
+    console.log("Watching position..");    
     //navigator.geolocation.getCurrentPosition(function(position) {
     var watchId = navigator.geolocation.watchPosition(function(position) {
         console.log("position");
