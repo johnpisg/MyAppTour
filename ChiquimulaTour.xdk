@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "8347b552-4b14-40c4-9e8a-627227ed198b",
-      "lastModifiedDate": 1491169557779,
+      "lastModifiedDate": 1491282011029,
       "creationDate": 1475977401878
     },
     "XDK-app-designer": "false",
@@ -311,10 +311,10 @@
         "excludedLibraries_": "",
         "cordovaCLIVersion_": "6.2.0",
         "crosswalkVersion_": "19",
-        "appVersion_": "1.0.0",
+        "appVersion_": "1.0.1",
         "appDescription_": "Citytour Chiquimula",
         "appAuthor_": "Lindsay Villela",
-        "appVersionCode_": "1",
+        "appVersionCode_": "6002",
         "signed_": true
       },
       "iOS": {
@@ -325,7 +325,7 @@
           "ios-configuration": "adhoc",
           "deployment-target": "8.0"
         },
-        "isActive_": true,
+        "isActive_": false,
         "certificateId_": "",
         "appName_": "ChiquimulaTour",
         "appID_": "xdk.intel.cordova.template.lite",
@@ -366,7 +366,7 @@
           "windows-publisher-display-name": "",
           "windows-publisher-id": ""
         },
-        "isActive_": true,
+        "isActive_": false,
         "certificateId_": "",
         "appName_": "ChiquimulaTour",
         "appID_": "xdk.intel.cordova.template.lite",
