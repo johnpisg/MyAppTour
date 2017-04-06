@@ -217,7 +217,7 @@ clientws.controller('detalleController', ["$scope", "restful", "$uibModal", "$lo
             var mensaje = $scope.sitio.titulo;
             var asunto = "Empieza ya tu City Tour Chiquimula!";
             var imagen = encodeURI($scope.getImagenUrl($scope.sitio));
-            var linkApp = "https://play.google.com/store/apps/details?id=uk.co.aifactory.chessfree&hl=es";
+            var linkApp = "https://play.google.com/store/apps/details?id=lindsay.citytour.chiquimula&hl=es";
             console.log(imagen);
             window.plugins.socialsharing.share(mensaje, asunto, imagen, linkApp);
         };
@@ -517,7 +517,7 @@ clientws.controller('mapaController', ["$scope", "restful", "$uibModal", "$log",
     
         $scope.compartirMapa = function() {
                         
-            var linkApp = "https://play.google.com/store/apps/details?id=uk.co.aifactory.chessfree&hl=es";
+            var linkApp = "https://play.google.com/store/apps/details?id=lindsay.citytour.chiquimula&hl=es";
             var urlMapa = "http://www.google.com/maps/place/";
             urlMapa = urlMapa + $scope.sitio.latitud + "," + $scope.sitio.longitud;
             // this is the complete list of currently supported params you can pass to the plugin (all optional)

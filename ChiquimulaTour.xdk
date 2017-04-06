@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "8347b552-4b14-40c4-9e8a-627227ed198b",
-      "lastModifiedDate": 1491282011029,
+      "lastModifiedDate": 1491447924255,
       "creationDate": 1475977401878
     },
     "XDK-app-designer": "false",
@@ -314,7 +314,7 @@
         "appVersion_": "1.0.1",
         "appDescription_": "Citytour Chiquimula",
         "appAuthor_": "Lindsay Villela",
-        "appVersionCode_": "6002",
+        "appVersionCode_": "6012",
         "signed_": true
       },
       "iOS": {
